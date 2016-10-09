@@ -13,18 +13,20 @@ class UIManager extends React.Component {
         this.props.store.dispatch(loadNutritionCalendar(Constants.testUser));
     };
 
-    render(){
+    render() {
         return (
             <div className='ui-frame'>
-                <div className={'nutri-trak-calendar '+(this.props.viewState.activeView === 'month' ? 'in' : 'out')}>
-                    { getNutritionCalendarView(this.props.viewState.nutritionMonth, this.props.viewState.nutritionDay, this.props.viewState.activeDayDetails,
-                                               this.props.onDayClicked, this.props.onAddMealClicked, this.props.onGotoCalendarClicked, this.props.onShowMealDetails,
-                                               this.props.onHideMealDetails, this.props.onShowDayDetails, this.props.onHideDayDetails) }
-                </div>
-                <div className={'nutri-trak-meal '+(this.props.viewState.activeView === 'meal' ? 'in' : 'out')}>
-                    { getNutritionMealView(this.props.viewState.nutritionDay, this.props.viewState.activeMealStep, this.props.onMealOptionAdded,
-                                           this.props.onNextMealStepClicked, this.props.onPrevMealStepClicked) }
-                </div>
+                {this.props.viewState.nutritionMonth ?
+                    <div className={'nutri-trak-calendar '+(this.props.viewState.activeView === 'month' ? 'in' : 'out')}>
+                        { getNutritionCalendarView(this.props.viewState.nutritionMonth, this.props.viewState.nutritionDay, this.props.viewState.activeDayDetails,
+                            this.props.onDayClicked, this.props.onAddMealClicked, this.props.onGotoCalendarClicked, this.props.onShowMealDetails,
+                            this.props.onHideMealDetails, this.props.onShowDayDetails, this.props.onHideDayDetails) }
+                    </div> : null }
+                {this.props.viewState.nutritionDay ?
+                    <div className={'nutri-trak-meal '+(this.props.viewState.activeView === 'meal' ? 'in' : 'out')}>
+                        { getNutritionMealView(this.props.viewState.nutritionDay, this.props.viewState.activeMealStep, this.props.onMealOptionAdded,
+                            this.props.onNextMealStepClicked, this.props.onPrevMealStepClicked) }
+                    </div> : null}
             </div>
         )
     }

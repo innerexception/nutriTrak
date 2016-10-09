@@ -6,7 +6,7 @@ import UIManager from './UIManager.jsx'
 
 const mapStateToProps = (state) => {
     return {
-        viewState: state.viewState ? state.viewState : getInitialViewState()
+        viewState: state.viewState ? state.viewState : {}
     };
 };
 

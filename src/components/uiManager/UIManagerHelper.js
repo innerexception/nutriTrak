@@ -7,7 +7,7 @@ export const getNutritionCalendarView = (nutritionMonth, nutritionSelectedDay, s
     <div className='calendar-view'>
         { nutritionMonth.map((nutritionDay) => {
             return <div className={'nutrition-day '+(nutritionDay.isSelected ? 'maximized' : 'minimized')} onClick={()=>onDayClicked(nutritionDay)}>
-                        {nutritionDay.day === nutritionSelectedDay.day ? getNutritionDayView(nutritionDay, onAddMealClicked, onGotoCalendarClicked) : null }
+                        {nutritionDay.day === (nutritionSelectedDay && nutritionSelectedDay.day) ? getNutritionDayView(nutritionDay, onAddMealClicked, onGotoCalendarClicked) : null }
                         <div className='nutrition-day-bar' onMouseEnter={()=>onShowDayDetails(nutritionDay)} onMouseLeave={()=>onHideDayDetails(nutritionDay)}>
                             <div className='nutrition-day-bar-bar' style={{width: (nutritionDay.rating*10)+'%'}}></div>
                             <div className='nutrition-day-bar-rating'>{nutritionDay.rating}</div>

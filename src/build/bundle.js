@@ -20885,7 +20885,7 @@
 	
 	var mapStateToProps = function mapStateToProps(state) {
 	    return {
-	        viewState: state.viewState ? state.viewState : (0, _UIManagerReducerHelper.getInitialViewState)()
+	        viewState: state.viewState ? state.viewState : {}
 	    };
 	};
 	
@@ -21920,16 +21920,16 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'ui-frame' },
-	                _react2.default.createElement(
+	                this.props.viewState.nutritionMonth ? _react2.default.createElement(
 	                    'div',
 	                    { className: 'nutri-trak-calendar ' + (this.props.viewState.activeView === 'month' ? 'in' : 'out') },
 	                    (0, _UIManagerHelper.getNutritionCalendarView)(this.props.viewState.nutritionMonth, this.props.viewState.nutritionDay, this.props.viewState.activeDayDetails, this.props.onDayClicked, this.props.onAddMealClicked, this.props.onGotoCalendarClicked, this.props.onShowMealDetails, this.props.onHideMealDetails, this.props.onShowDayDetails, this.props.onHideDayDetails)
-	                ),
-	                _react2.default.createElement(
+	                ) : null,
+	                this.props.viewState.nutritionDay ? _react2.default.createElement(
 	                    'div',
 	                    { className: 'nutri-trak-meal ' + (this.props.viewState.activeView === 'meal' ? 'in' : 'out') },
 	                    (0, _UIManagerHelper.getNutritionMealView)(this.props.viewState.nutritionDay, this.props.viewState.activeMealStep, this.props.onMealOptionAdded, this.props.onNextMealStepClicked, this.props.onPrevMealStepClicked)
-	                )
+	                ) : null
 	            );
 	        }
 	    }]);
@@ -22320,7 +22320,7 @@
 	                { className: 'nutrition-day ' + (nutritionDay.isSelected ? 'maximized' : 'minimized'), onClick: function onClick() {
 	                        return onDayClicked(nutritionDay);
 	                    } },
-	                nutritionDay.day === nutritionSelectedDay.day ? getNutritionDayView(nutritionDay, onAddMealClicked, onGotoCalendarClicked) : null,
+	                nutritionDay.day === (nutritionSelectedDay && nutritionSelectedDay.day) ? getNutritionDayView(nutritionDay, onAddMealClicked, onGotoCalendarClicked) : null,
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'nutrition-day-bar', onMouseEnter: function onMouseEnter() {
