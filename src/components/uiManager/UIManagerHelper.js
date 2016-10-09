@@ -34,6 +34,7 @@ const getDayClassName = (day, selectedDay) => {
     return className;
 };
 
+//TODO: add turns into cancel when meal editor open
 export const getNutritionDayView = (nutritionDay, onAddMealClicked, onGotoCalendarClicked, onShowMealDetails, onHideMealDetails) => {
     let previousMealValues = 0;
     return (
@@ -49,7 +50,8 @@ export const getNutritionDayView = (nutritionDay, onAddMealClicked, onGotoCalend
             <div className='nutrition-day-right'>
                 <div className='nutrition-day-time-bar'>
                     <div className='nutrition-day-icon icon'></div>
-                    <div className='nutrition-meal-btn icon' style={{top: getPercentFromTimeOfDay(new Date())+'%'}} onClick={onAddMealClicked}></div>
+                    { new Date().getDate() === nutritionDay.day ?
+                        <div className='nutrition-meal-btn icon' style={{top: getPercentFromTimeOfDay(new Date())+'%'}} onClick={onAddMealClicked}></div> : null }
                     <div className='nutrition-night-icon icon'></div>
                     <div className='nutrition-day-back-btn icon' onClick={onGotoCalendarClicked}></div>
                 </div>
@@ -62,16 +64,17 @@ const getPercentFromTimeOfDay = (date) => {
     return ((date.getHours()/24)*100)/2;
 };
 
-export const getNutritionMealView = (day, activeStep, activeMeal, onMealOptionAdded, onNextMealStepClicked, onPrevMealStepClicked) =>
+//TODO: next button is a down arrow
+//TODO: onMealStepSelected
+export const getNutritionMealView = (day, activeStep, activeMeal, onMealOptionAdded, onNextMealStepClicked) =>
     <div className='nutrition-meal-wizard'>
         {Constants.mealSteps.map((step) => {
-            return <div className={'nutrition-meal-step '+step.type === activeStep ? 'in' : 'out'}>
-                        <div className='nutrition-step-title'>{step.title + '('+day[step.type]+' / '+Constants.dailyTargets[step.type]+' so far today)'}</div>
+            return <div className={'nutrition-meal-step '+(step.type === activeStep ? 'in' : 'out')}>
+                        <div className='nutrition-step-title' onClick={()=>onMealStepSelected(step)}>{step.title + (Constants.dailyTargets[step.type] ? ' ('+day[step.type]+' / '+Constants.dailyTargets[step.type]+' so far today)' : ' ('+day[step.type]+' so far today)')}</div>
                         {step.options.map((mealOption) => {
                             return <div className={'nutrition-meal-option '+(isMealOptionSelected(activeMeal, mealOption) ? 'selected' : '')} onClick={()=>onMealOptionAdded(mealOption, step.type)}>{mealOption.name}</div>
                         })}
                         <div className={'nutrition-step-next-btn '+(step.isEnd ? 'add-meal' : '')} onClick={()=>onNextMealStepClicked(activeStep)}></div>
-                        <div className={'nutrition-step-back-btn '+(step.isStart ? 'cancel-meal' : '')} onClick={()=>onPrevMealStepClicked(activeStep)}></div>
                    </div>
         })};
     </div>;
@@ -103,9 +106,13 @@ const getMealCounts = (meal) => {
     return counts;
 };
 
+//TODO
 export const getDayDetails = (day) =>
     <div>The Day Stats
         { Object.keys(Constants.dailyTargets).map((type) => {
             return <div>{type}: {day[type]} / {Constants.dailyTargets[type]}</div>
         })}
     </div>;
+
+//TODO make back button a calendar icon
+//TODO add a line next to the add button, offset it, add a few time hashlines

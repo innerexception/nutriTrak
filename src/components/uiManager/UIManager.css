@@ -204,6 +204,48 @@ body{
     left: 200%
 }
 
+.nutrition-meal-wizard{
+    width: 100%;
+    height: 100%;
+}
+
+.nutrition-meal-step.in{
+    width: 100%;
+    height: 80%;
+}
+
+.nutrition-meal-step.in .nutrition-meal-option{
+    color: black;
+    background: #8e8e93;
+    border-radius: 0.5em;
+    font-size: 2em;
+    margin: 0.1em;
+    padding: 0.1em;
+    text-align: center;
+    opacity: 0.3;
+}
+
+.nutrition-meal-step.in .nutrition-meal-option.selected{
+    opacity: 1;
+}
+
+.nutrition-meal-step.in .nutrition-step-title{
+    font-size: 3em;
+    padding: 1em;
+    text-align: center;
+}
+
+.nutrition-meal-step.out .nutrition-meal-option{
+    height:0;
+    width:0;
+}
+
+.nutrition-meal-step.out .nutrition-step-title{
+    font-size: 2em;
+    padding: 0.1em;
+    text-align: center;
+}
+
 
 @keyframes pass {
     from {transform: scale(0.5);}
