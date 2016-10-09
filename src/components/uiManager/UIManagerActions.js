@@ -1,25 +1,27 @@
-export const newGame = () => {
+export const loadNutritionCalendar = (user) => {
     return {
-        type: 'NEW_GAME'
+        type: 'LOAD_MONTH_VIEW',
+        nutritionMonth: user.nutritionHistory
     }
 };
 
-export const spaceMouseOver = (space) => {
+export const dayClicked = (day) => {
     return {
-        type: 'SPACE_OVER',
-        space
+        type: 'LOAD_DAY_VIEW',
+        nutritionDay: day
     }
 };
 
-export const spaceClick = (space) => {
+export const addMealClicked = () => {
     return {
-        type: 'SPACE_CLICK',
-        space
+        type: 'LOAD_MEAL_VIEW'
     }
 };
 
-export const passClicked = () => {
+export const mealOptionAdded = (name, foodType) => {
     return {
-        type: 'PASS_CLICK'
+        type: 'ADD_MEAL_OPTION',
+        name,
+        foodType
     }
 };

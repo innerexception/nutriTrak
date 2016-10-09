@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import {  } from './UIManagerActions.js'
+import { dayClicked, addMealClicked, mealOptionAdded } from './UIManagerActions.js'
 import { getInitialViewState } from './UIManagerReducerHelper.js';
 import UIManager from './UIManager.jsx'
 
@@ -11,8 +11,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSpaceMouseOver: (space) => {
-            dispatch(spaceMouseOver(space));
+        onDayClicked: (day) => {
+            dispatch(dayClicked(day));
+        },
+        onAddMealClicked: () => {
+            dispatch(addMealClicked());
+        },
+        onMealOptionAdded: (mealOption, type) => {
+            dispatch(mealOptionAdded(mealOption.name, type));
         }
     }
 };
