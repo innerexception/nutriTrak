@@ -12,9 +12,10 @@ export const dayClicked = (day) => {
     }
 };
 
-export const addMealClicked = () => {
+export const addMealClicked = (meal) => {
     return {
-        type: 'LOAD_MEAL_VIEW'
+        type: 'LOAD_MEAL_VIEW',
+        meal
     }
 };
 
@@ -23,5 +24,51 @@ export const mealOptionAdded = (name, foodType) => {
         type: 'ADD_MEAL_OPTION',
         name,
         foodType
+    }
+};
+
+export const gotoCalendar = () => {
+    return {
+        type: 'LOAD_MONTH_VIEW'
+    }
+};
+
+export const showMealDetails = (meal) => {
+    return {
+        type: 'LOAD_MEAL_DETAILS',
+        meal
+    }
+};
+
+export const hideMealDetails = () => {
+    return {
+        type: 'HIDE_MEAL_DETAILS'
+    }
+};
+
+export const showDayDetails = (day) => {
+    return {
+        type: 'LOAD_DAY_DETAILS',
+        day
+    }
+};
+
+export const hideDayDetails = () => {
+    return {
+        type: 'HIDE_DAY_DETAILS'
+    }
+};
+
+export const mealNextStep = (activeStep) => {
+    return {
+        type: 'MEAL_NEXT_STEP',
+        activeStep
+    }
+};
+
+export const mealPreviousStep = (activeStep) => {
+    return {
+        type: 'MEAL_PREVIOUS_STEP',
+        activeStep
     }
 };

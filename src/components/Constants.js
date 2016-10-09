@@ -26,10 +26,17 @@ export default {
         ]
     },
     mealSteps: [
-        { title: 'Pick a Protein', type: 'protein', options: [{name: 'Ground Beef'}] },
+        { title: 'Pick a Protein', type: 'protein', options: [{name: 'Ground Beef'}], isStart: true },
         { title: 'Pick your Veg', type: 'veg', options: [] },
         { title: 'To Drink?', type: 'drink', options: [] },
-        { title: 'Choose a Fat', type: 'fat', options: [] },
-        { title: 'Finally, Carbs', type: 'carbs', options: [] }
-    ]
+        { title: 'Choose a Fat', type: 'fats', options: [] },
+        { title: 'Finally, Carbs', type: 'carbs', options: [], isEnd: true }
+    ],
+    dailyTargets: {
+        protein: 6,
+        veg: null,
+        drink: 8,
+        fats: 2,
+        carbs: 3
+    }
 }

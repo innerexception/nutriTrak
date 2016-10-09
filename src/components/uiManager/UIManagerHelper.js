@@ -2,7 +2,7 @@ import React from 'react';
 import { onDayClicked } from './UIManagerActions.js';
 import Constants from '../Constants.js';
 
-export const getNutritionCalendarView = (nutritionMonth, nutritionSelectedDay, onDayClicked, onAddMealClicked,
+export const getNutritionCalendarView = (nutritionMonth, nutritionSelectedDay, showDayDetails, onDayClicked, onAddMealClicked,
                                          onGotoCalendarClicked, onShowMealDetails, onHideMealDetails, onShowDayDetails, onHideDayDetails) =>
     <div className='calendar-view'>
         { nutritionMonth.map((nutritionDay) => {
@@ -11,6 +11,9 @@ export const getNutritionCalendarView = (nutritionMonth, nutritionSelectedDay, o
                         <div className='nutrition-day-bar' onMouseEnter={()=>onShowDayDetails(nutritionDay)} onMouseLeave={()=>onHideDayDetails(nutritionDay)}>
                             <div className='nutrition-day-bar-bar' style={{width: (nutritionDay.rating*10)+'%'}}></div>
                             <div className='nutrition-day-bar-rating'>{nutritionDay.rating}</div>
+                        </div>
+                        <div className={'nutrition-day-detail '+(showDayDetails ? 'in' : 'out')}>
+                            { getDayDetails(nutritionDay) }
                         </div>
                    </div>
         }) }
@@ -23,14 +26,14 @@ export const getNutritionDayView = (nutritionDay, onAddMealClicked, onGotoCalend
             <div className='nutrition-day-left'>
                 { nutritionDay.meals.map((meal) => {
                     let leftPadding = previousMealValues;
-                    previousMealValues+=meal.rating;
+                    previousMealValues+=getMealRating(meal);
                     return <div className='nutrition-meal' onMouseEnter={()=>onShowMealDetails(meal)} onMouseLeave={()=>onHideMealDetails(meal)} style={{width: (meal.rating*10)+'px', paddingLeft: (leftPadding*10)+'px'}}></div>
                 }) }
             </div>
             <div className='nutrition-day-right'>
                 <div className='nutrition-day-time-bar'>
                     <div className='nutrition-day-icon'></div>
-                    <div className='nutrition-meal-btn' style={{top: getPercentFromTimeOfDay(Date.now())+'%'}} onClick={onAddMealClicked}></div>
+                    <div className='nutrition-meal-btn' style={{top: getPercentFromTimeOfDay(new Date())+'%'}} onClick={onAddMealClicked}></div>
                     <div className='nutrition-night-icon'></div>
                     <div className='nutrition-day-back-btn' onClick={onGotoCalendarClicked}></div>
                 </div>
@@ -40,23 +43,53 @@ export const getNutritionDayView = (nutritionDay, onAddMealClicked, onGotoCalend
 };
 
 const getPercentFromTimeOfDay = (date) => {
-    return 50;
+    return (date.getHours()/24)*100;
 };
 
 export const getNutritionMealView = (day, activeStep, activeMeal, onMealOptionAdded, onNextMealStepClicked, onPrevMealStepClicked) =>
     <div className='nutrition-meal-wizard'>
         {Constants.mealSteps.map((step) => {
             return <div className={'nutrition-meal-step '+step.type === activeStep ? 'in' : 'out'}>
-                        <div className='nutrition-step-title'>{step.title + '('+day[step.type]+' / '+step.max+' so far today)'}</div>
+                        <div className='nutrition-step-title'>{step.title + '('+day[step.type]+' / '+Constants.dailyTargets[step.type]+' so far today)'}</div>
                         {step.options.map((mealOption) => {
-                            return <div className={'nutrition-meal-option '+(isSelected(activeMeal, mealOption) ? 'selected' : '')} onClick={()=>onMealOptionAdded(mealOption, step.type)}>{mealOption.name}</div>
+                            return <div className={'nutrition-meal-option '+(isMealOptionSelected(activeMeal, mealOption) ? 'selected' : '')} onClick={()=>onMealOptionAdded(mealOption, step.type)}>{mealOption.name}</div>
                         })}
-                        <div className='nutrition-step-next-btn' onClick={()=>onNextMealStepClicked(activeStep)}></div>
-                        <div className='nutrition-step-back-btn' onClick={()=>onPrevMealStepClicked(activeStep)}></div>
+                        <div className={'nutrition-step-next-btn '+(step.isEnd ? 'add-meal' : '')} onClick={()=>onNextMealStepClicked(activeStep)}></div>
+                        <div className={'nutrition-step-back-btn '+(step.isStart ? 'cancel-meal' : '')} onClick={()=>onPrevMealStepClicked(activeStep)}></div>
                    </div>
         })};
     </div>;
 
-const isSelected = (activeMeal, mealOption) => {
-    return false;
+const isMealOptionSelected = (activeMeal, mealOption) => {
+    return activeMeal.filter((amealOption) => amealOption.name === mealOption.name).length > 0;
 };
+
+const getMealRating = (meal) => {
+    let mealCounts = getMealCounts(meal);
+    let mealRating = 0;
+    Object.keys(Constants.dailyTargets).forEach((type) => {
+        mealRating += mealCounts[type]/Constants.dailyTargets[type];
+    });
+    return mealRating;
+};
+
+const getMealCounts = (meal) => {
+    let counts  = {
+        protein:0,
+        fats:0,
+        veg:0,
+        drink:0,
+        carbs:0
+    };
+    meal.forEach((mealOption) => {
+        counts[mealOption.type]++;
+    });
+    return counts;
+};
+
+export const getDayDetails = (day) =>
+    <div>The Day Stats
+        { Object.keys(Constants.dailyTargets).map((type) => {
+            return <div>{type}: {day[type]} / {Constants.dailyTargets[type]}</div>
+        })}
+    </div>;

@@ -6,32 +6,77 @@ const appReducer = (state = {}, action) => {
     let viewState = state.viewState;
     switch (action.type) {
         case 'LOAD_MONTH_VIEW':
-            return { viewState: {...viewState, activeView: 'month', nutritionMonth: action.nutritionMonth }};
+            return { viewState: {...viewState, activeView: 'month', nutritionMonth: action.nutritionMonth ? action.nutritionMonth : viewState.nutritionMonth, nutritionDay: null, activeDayDetails: null }};
         case 'LOAD_DAY_VIEW':
             return { viewState: {...viewState, nutritionDay: action.nutritionDay }};
         case 'LOAD_MEAL_VIEW':
-            return { viewState: {...viewState, activeView: 'meal', activeMealStep: Constants.mealSteps[0].type}};
+            return { viewState: {...viewState, activeView: 'meal', activeMealStep: Constants.mealSteps[0].type, activeMeal: action.meal ? action.meal : []}};
         case 'ADD_MEAL_OPTION':
-            let activeMeal = viewState.activeMeal ? viewState.activeMeal : [];
-            activeMeal.push({name: action.name, type: action.foodType});
-            return { viewState: {...viewState, activeMeal}};
-        case 'ADD_MEAL':
-            return { viewState: {...viewState, nutritionMonth: updateNutritionMonthAddMealToday(viewState.activeMeal, viewState.nutritionMonth)}};
+            viewState.activeMeal.push({name: action.name, type: action.foodType});
+            return { viewState: {...viewState, activeMeal: viewState.activeMeal}};
+        case 'LOAD_MEAL_DETAILS':
+            return { viewState: {...viewState, activeMealDetails: action.meal}};
+        case 'HIDE_MEAL_DETAILS':
+            return { viewState: {...viewState, activeMealDetails: null}};
+        case 'LOAD_DAY_DETAILS':
+            return { viewState: {...viewState, activeDayDetails: action.day}};
+        case 'HIDE_DAY_DETAILS':
+            return { viewState: {...viewState, activeDayDetails: null}};
+        case 'MEAL_NEXT_STEP':
+            return { viewState: updateViewStateActiveMealStep(viewState, action.activeStep)};
+        case 'MEAL_PREVIOUS_STEP':
+            return { viewState: updateViewStateActiveMealStep(viewState, action.activeStep, true)};
         default:
             return state
     }
 };
 
-const updateNutritionMonthAddMealToday = (meal, nutritionMonth) => {
+const updateNutritionMonthAddMealToday = (meal, nutritionDay, nutritionMonth) => {
     let newMonth = {...nutritionMonth};
-    let now = Date.now();
     newMonth.forEach((day) => {
-        if(day.day === now.day){
-            //TODO: also update day food type totals here
+        if(day.day === nutritionDay.day){
+            let mealCounts = getMealCounts(meal);
+            day.protein+= mealCounts.protein;
+            day.fats+= mealCounts.fats;
+            day.drink += mealCounts.drink;
+            day.carbs += mealCounts.carbs;
+            day.veg += mealCounts.veg;
             day.meals.push(meal);
+            day.rating = getDayRating(day);
         }
     });
     return newMonth;
+};
+
+const updateViewStateActiveMealStep = (viewState, activeStep, previous) => {
+    let newState = {...viewState};
+    let stepIndex=0;
+    Constants.mealSteps.forEach((step, i) => { if(step.type === activeStep) stepIndex = i; });
+
+    if(previous){
+        if(stepIndex > 0) stepIndex--;
+        else{
+            newState.activeView = 'month';
+            newState.activeMealStep = Constants.mealSteps[0].type;
+            newState.activeMeal = [];
+        }
+    }
+    else{
+        if(stepIndex < Constants.mealSteps.length-1) stepIndex++;
+        else{
+            newState.nutritionMonth = updateNutritionMonthAddMealToday(newState.activeMeal, newState.nutritionDay, newState.nutritionMonth);
+        }
+    }
+    newState.activeStep = Constants.mealSteps[stepIndex].type;
+    return newState;
+};
+
+const getDayRating = (day) => {
+    let dayRating = 0;
+    Object.keys(Constants.dailyTargets).forEach((type) => {
+        dayRating += day[type]/Constants.dailyTargets[type];
+    });
+    return dayRating;
 };
 
 export default appReducer;

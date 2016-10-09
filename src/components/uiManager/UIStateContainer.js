@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import { dayClicked, addMealClicked, mealOptionAdded } from './UIManagerActions.js'
+import { dayClicked, addMealClicked, mealOptionAdded, gotoCalendar,
+         showMealDetails, hideMealDetails, mealNextStep, mealPreviousStep } from './UIManagerActions.js'
 import { getInitialViewState } from './UIManagerReducerHelper.js';
 import UIManager from './UIManager.jsx'
 
@@ -12,13 +13,34 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onDayClicked: (day) => {
-            dispatch(dayClicked(day));
+            dispatch(dayClicked(day))
         },
         onAddMealClicked: () => {
-            dispatch(addMealClicked());
+            dispatch(addMealClicked())
         },
         onMealOptionAdded: (mealOption, type) => {
-            dispatch(mealOptionAdded(mealOption.name, type));
+            dispatch(mealOptionAdded(mealOption.name, type))
+        },
+        onGotoCalendarClicked: () => {
+            dispatch(gotoCalendar())
+        },
+        onShowMealDetails: (meal) => {
+            dispatch(showMealDetails(meal))
+        },
+        onHideMealDetails: () => {
+            dispatch(hideMealDetails());
+        },
+        onShowDayDetails: (day) => {
+            dispatch(showDayDetails(day))
+        },
+        onHideDayDetails: () => {
+            dispatch(hideDayDetails());
+        },
+        onNextMealStepClicked: (activeStep) => {
+            dispatch(mealNextStep(activeStep));
+        },
+        onPrevMealStepClicked: (activeStep) => {
+            dispatch(mealPreviousStep(activeStep));
         }
     }
 };
