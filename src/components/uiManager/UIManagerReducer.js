@@ -6,7 +6,9 @@ const appReducer = (state = {}, action) => {
     let viewState = state.viewState;
     switch (action.type) {
         case 'LOAD_MONTH_VIEW':
-            return { viewState: {...viewState, activeView: 'month', nutritionMonth: action.nutritionMonth ? action.nutritionMonth : viewState.nutritionMonth, nutritionDay: null, activeDayDetails: null }};
+            let newState = { viewState: {...viewState, activeView: 'month', nutritionMonth: action.nutritionMonth ? action.nutritionMonth : viewState.nutritionMonth, nutritionDay: false, activeDayDetails: null, activeMeal:[] }};
+
+            return newState;
         case 'LOAD_DAY_VIEW':
             return { viewState: {...viewState, nutritionDay: action.nutritionDay }};
         case 'LOAD_MEAL_VIEW':
