@@ -49,20 +49,27 @@ export const getDayRating = (day) => {
 export const getDayDetails = (day) =>
     <div>
         Today so far:
-        { Object.keys(Constants.dailyTargets).map((type) => {
-            let difference = day[type] - Constants.dailyTargets[type];
-            let color = 'green';
-            if(difference > 0 && (type !== 'veg' && type !== 'drink')) color = 'red';
-            if(difference < 0){
-                color = 'red'; difference = 'Need '+(-difference)+' more';
-            }
-            if(difference > 0) difference = (type==='carbs' || type === 'fats' ? 'too many, -' : 'more is better, +')+(difference/10);
-            return <div>{type}: {day[type]} / {Constants.dailyTargets[type]} {difference !== 0 ?
-                        <span style={{color: color}}>({difference})</span> :
-                        <span className='checkmark inline'></span>}
-                   </div>
-        })}
-        <div>Meals: {day.meals.length} / 5-6</div>
-        <div className='checkmark'>Ate within an hour of waking</div>
-        <div className='checkmark'>Recharge meals used</div>
+        <table>
+            { Object.keys(Constants.dailyTargets).map((type) => {
+                let difference = day[type] - Constants.dailyTargets[type];
+                let color = 'green';
+                if(difference > 0 && (type !== 'veg' && type !== 'drink')) color = 'red';
+                if(difference < 0){
+                    color = 'red'; difference = 'Need '+(-difference)+' more';
+                }
+                if(difference > 0) difference = (type==='carbs' || type === 'fats' ? 'too many, -' : 'more is better, +')+(difference/10);
+                return <tr>
+                            <td>{type}:</td>
+                            <td>
+                                <span>{day[type]} / {Constants.dailyTargets[type]} {difference !== 0 ?
+                                    <span style={{color: color}}>({difference})</span> :
+                                    <span className='checkmark inline'></span>}
+                                </span>
+                            </td>
+                       </tr>
+            })}
+            <tr><td>Meals:</td><td>{day.meals.length} / 5-6</td></tr>
+            <tr><td>Ate within an hour of waking</td><td><span className='checkmark inline'></span></td></tr>
+            <tr><td>Recharge meals used</td><td><span className='checkmark inline'></span></td></tr>
+        </table>
     </div>;

@@ -14,8 +14,7 @@
     right: 0;
     background: #364150;
     z-index: 1;
-    border-radius: 0.2em;
-    border: 2px dashed #2C3543;
+    border: 1px solid #F4AE00;
     transition: opacity 200ms, width 700ms;
 }
 .month-details-popup.in{
