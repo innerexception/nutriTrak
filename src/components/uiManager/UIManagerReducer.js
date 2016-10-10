@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import { getInitialViewState, getFlankedNeighborPositions, flipFlankedNeighbors, doesValidMoveExist } from './UIManagerReducerHelper.js'
-import { getMealCounts, getDayRating } from '../Util.js';
+import { getMealCounts } from '../nutritionMeal/Meal.jsx';
+import { getDayRating } from '../nutritionDay/Day.jsx';
 import Constants from '../Constants.js';
 
 const appReducer = (state = {}, action) => {

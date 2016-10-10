@@ -20674,7 +20674,9 @@
 	
 	var _UIManagerReducerHelper = __webpack_require__(176);
 	
-	var _Util = __webpack_require__(178);
+	var _Meal = __webpack_require__(211);
+	
+	var _Day = __webpack_require__(214);
 	
 	var _Constants = __webpack_require__(177);
 	
@@ -20721,7 +20723,7 @@
 	    var newMonth = Array.from(nutritionMonth);
 	    newMonth.forEach(function (day) {
 	        if (day.day === nutritionDay.day) {
-	            var mealCounts = (0, _Util.getMealCounts)(meal);
+	            var mealCounts = (0, _Meal.getMealCounts)(meal);
 	            day.protein += mealCounts.protein;
 	            day.fats += mealCounts.fats;
 	            day.drink += mealCounts.drink;
@@ -20729,7 +20731,7 @@
 	            day.veg += mealCounts.veg;
 	            meal[0].hours = new Date().getHours();
 	            day.meals.push(meal);
-	            day.rating = (0, _Util.getDayRating)(day);
+	            day.rating = (0, _Day.getDayRating)(day);
 	        }
 	    });
 	    return newMonth;
@@ -20819,7 +20821,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.getColorFromRating = exports.getDayRating = exports.getMonthScore = exports.getMealCounts = undefined;
+	exports.getColorFromRating = undefined;
 	
 	var _Constants = __webpack_require__(177);
 	
@@ -20830,41 +20832,6 @@
 	var _chromaJs2 = _interopRequireDefault(_chromaJs);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var getMealCounts = exports.getMealCounts = function getMealCounts(meal) {
-	    var counts = {
-	        protein: 0,
-	        fats: 0,
-	        veg: 0,
-	        drink: 0,
-	        carbs: 0
-	    };
-	    meal.forEach(function (mealOption) {
-	        counts[mealOption.type] += mealOption.count;
-	    });
-	    return counts;
-	};
-	
-	var getMonthScore = exports.getMonthScore = function getMonthScore(month) {
-	    var monthRating = 0;
-	    var activeDays = 0;
-	    month.forEach(function (day) {
-	        var dayRateing = getDayRating(day);
-	        if (dayRateing) {
-	            activeDays++;
-	            monthRating += dayRateing;
-	        }
-	    });
-	    return (monthRating / month.length).toFixed(1);
-	};
-	
-	var getDayRating = exports.getDayRating = function getDayRating(day) {
-	    var dayRating = 0;
-	    Object.keys(_Constants2.default.dailyTargets).forEach(function (type) {
-	        dayRating += day[type] / _Constants2.default.dailyTargets[type];
-	    });
-	    return dayRating;
-	};
 	
 	var getColorFromRating = exports.getColorFromRating = function getColorFromRating(rating) {
 	    return _chromaJs2.default.mix('#ff0000', '#00ff00', rating / 10, 'lab').rgba();
@@ -23393,7 +23360,7 @@
 	
 	var _UIStateContainer2 = _interopRequireDefault(_UIStateContainer);
 	
-	__webpack_require__(211);
+	__webpack_require__(212);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -24463,7 +24430,9 @@
 	
 	__webpack_require__(198);
 	
-	var _UIManagerHelper = __webpack_require__(210);
+	var _Month = __webpack_require__(210);
+	
+	var _Meal = __webpack_require__(211);
 	
 	var _UIManagerActions = __webpack_require__(196);
 	
@@ -24539,25 +24508,25 @@
 	                        ),
 	                        this.props.viewState.nutritionMonth ? _react2.default.createElement(
 	                            'span',
-	                            { style: { verticalAlign: 'bottom', color: 'rgba(' + (0, _Util.getColorFromRating)((0, _Util.getMonthScore)(this.props.viewState.nutritionMonth)) + ')' } },
-	                            (0, _Util.getMonthScore)(this.props.viewState.nutritionMonth)
+	                            { style: { verticalAlign: 'bottom', color: 'rgba(' + (0, _Util.getColorFromRating)((0, _Month.getMonthScore)(this.props.viewState.nutritionMonth)) + ')' } },
+	                            (0, _Month.getMonthScore)(this.props.viewState.nutritionMonth)
 	                        ) : null
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'month-details-popup ' + (this.props.viewState.showMonthDetails ? 'in' : 'out') },
-	                        (0, _UIManagerHelper.getMonthReport)(this.props.viewState.nutritionMonth)
+	                        (0, _Month.getMonthReport)(this.props.viewState.nutritionMonth)
 	                    )
 	                ),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'nutri-trak-calendar ' + (this.props.viewState.activeView === 'month' ? 'in' : 'out') },
-	                    this.props.viewState.nutritionMonth ? (0, _UIManagerHelper.getNutritionCalendarView)(this.props.viewState.nutritionMonth, this.props.viewState.nutritionDay, this.props.viewState.activeMeal, this.props.viewState.activeDayDetails, this.props.viewState.activeView, this.props.onDayClicked, this.props.onAddMealClicked, this.props.onGotoCalendarClicked, this.props.onShowMealDetails, this.props.onHideMealDetails, this.props.onShowDayDetails, this.props.onHideDayDetails) : null
+	                    this.props.viewState.nutritionMonth ? (0, _Month.getNutritionCalendarView)(this.props.viewState.nutritionMonth, this.props.viewState.nutritionDay, this.props.viewState.activeMeal, this.props.viewState.activeDayDetails, this.props.viewState.activeView, this.props.onDayClicked, this.props.onAddMealClicked, this.props.onGotoCalendarClicked, this.props.onShowMealDetails, this.props.onHideMealDetails, this.props.onShowDayDetails, this.props.onHideDayDetails) : null
 	                ),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'nutri-trak-meal ' + (this.props.viewState.activeView === 'meal' ? 'in' : 'out') },
-	                    this.props.viewState.nutritionDay ? (0, _UIManagerHelper.getNutritionMealView)(this.props.viewState.nutritionDay, this.props.viewState.activeMealStep, this.props.viewState.activeMeal, this.props.onMealOptionAdded, this.props.onNextMealStepClicked, this.props.onMealStepSelected) : null
+	                    this.props.viewState.nutritionDay ? (0, _Meal.getNutritionMealView)(this.props.viewState.nutritionDay, this.props.viewState.activeMealStep, this.props.viewState.activeMeal, this.props.onMealOptionAdded, this.props.onNextMealStepClicked, this.props.onMealStepSelected) : null
 	                )
 	            );
 	        }
@@ -24603,7 +24572,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body{\r\n    overflow: hidden;\r\n    color: #8e8e93;\r\n}\r\n\r\n.gainlife-app{\r\n    height: 100%;\r\n    background: #2C3543;\r\n}\r\n\r\n.ui-frame{\r\n    height: 100%;\r\n    overflow: hidden;\r\n}\r\n\r\n.ui-frame .inline-div{\r\n    display: inline-block;\r\n    vertical-align: middle;\r\n}\r\n\r\n.nutri-trak-calendar{\r\n    margin: 3em;\r\n    margin-top: 0;\r\n    padding: 2em;\r\n    border: solid #364150 2px;\r\n    border-radius: 0.5em;\r\n    height: calc(100% - 15em);\r\n    overflow:hidden;\r\n}\r\n\r\n.nutri-trak-day{\r\n    background: #5F8295;\r\n    transition: all 1s;\r\n}\r\n.nutri-trak-day.in{\r\n\r\n}\r\n.nutri-trak-day.out{\r\n    opacity: 0;\r\n\r\n}\r\n\r\n.calendar-view{\r\n    height: 100%;\r\n}\r\n\r\n.nutrition-day{\r\n    display: inline-block;\r\n    border: 1px solid #364150;\r\n    position: relative;\r\n    transition: all 500ms;\r\n    width: 14%;\r\n    height: 18%;\r\n}\r\n\r\n.nutrition-day.label{\r\n    font-size: 2em;\r\n    height: auto;\r\n    border: none;\r\n    text-align: center;\r\n    margin-bottom: 1em;\r\n}\r\n\r\n.nutrition-day.past{\r\n    opacity: 0.3;\r\n}\r\n\r\n.nutrition-day.maximized{\r\n    height: 92%;\r\n    width: 100%;\r\n    border: none;\r\n    opacity: 1;\r\n}\r\n.nutrition-day.minimized{\r\n    opacity: 0;\r\n    height: 0;\r\n    width: 0;\r\n    overflow: hidden;\r\n}\r\n\r\n.nutrition-day-bar-rating{\r\n    font-size: 3em;\r\n    position: absolute;\r\n    right: 0;\r\n    left: 0;\r\n    margin: auto;\r\n    width: 1em;\r\n    top: 0;\r\n    bottom: 0;\r\n    height: 1em;\r\n}\r\n\r\n.nutrition-day-bar{\r\n    height: 100%;\r\n    position: relative;\r\n    width: 83%;\r\n    cursor: pointer;\r\n}\r\n\r\n.nutrition-day.maximized .nutrition-day-bar{\r\n    height: 25%;\r\n    border: 1px solid #F4AE00;\r\n}\r\n\r\n.nutrition-day-bar-bar{\r\n    height: 100%;\r\n}\r\n\r\n.nutrition-day-detail{\r\n    transition: height 800ms, opacity 500ms;\r\n    position: absolute;\r\n    overflow: hidden;\r\n}\r\n.nutrition-day-detail.out{\r\n    opacity: 0;\r\n    height: 0;\r\n}\r\n.nutrition-day-detail.in{\r\n    opacity: 1;\r\n    height: 100%;\r\n}\r\n\r\n\r\n.nutrition-day-view{\r\n    height: 75%;\r\n    margin-bottom: 2em;\r\n}\r\n.nutrition-day-left{\r\n    display: inline-block;\r\n    width: 100%;\r\n    height: 100%;\r\n    background: #364150;\r\n    border: 1px solid #F4AE00;\r\n    overflow: hidden;\r\n}\r\n.nutrition-day-right{\r\n    position: absolute;\r\n    width: 10%;\r\n    top: 0;\r\n    height: 100%;\r\n    right: 0;\r\n}\r\n.nutrition-meal{\r\n    background: saddlebrown;\r\n    height: 8%;\r\n}\r\n\r\n.nutrition-day-time-bar{\r\n    width: 100%;\r\n    height: 100%;\r\n    position: relative;\r\n    overflow: hidden;\r\n}\r\n.nutrition-meal-btn{\r\n    position: absolute;\r\n}\r\n\r\n.icon{\r\n    background-repeat: no-repeat;\r\n    background-size: contain;\r\n    width: 4em;\r\n    height: 4em;\r\n}\r\n\r\n.nutrition-day-icon{\r\n    background-image: url(" + __webpack_require__(201) + ");\r\n    position: absolute;\r\n    top: 4%;\r\n    opacity: 0.3;\r\n}\r\n\r\n.nutrition-night-icon{\r\n    background-image: url(" + __webpack_require__(202) + ");\r\n    position: absolute;\r\n    bottom: 29%;\r\n    opacity: 0.3;\r\n}\r\n\r\n.nutrition-day-back-btn{\r\n    background-image: url(" + __webpack_require__(203) + ");\r\n    position: absolute;\r\n    bottom: 5%;\r\n    cursor: pointer;\r\n    z-index: 10;\r\n}\r\n\r\n.nutrition-meal-btn{\r\n    background-image: url(" + __webpack_require__(204) + ");\r\n    cursor: pointer;\r\n    transition: all 1s;\r\n}\r\n\r\n.nutrition-step-next-btn{\r\n    background-image: url(" + __webpack_require__(205) + ");\r\n    cursor: pointer;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    margin-top: 1em;\r\n}\r\n\r\n.cancel{\r\n    transform: rotate(45deg);\r\n}\r\n\r\n.nutrition-step-next-btn.add-meal{\r\n    background-image: url(" + __webpack_require__(206) + ");\r\n    cursor: pointer;\r\n}\r\n\r\n.nutri-trak-meal{\r\n    position: absolute;\r\n    top: -21%;\r\n    left: 0;\r\n    margin: auto;\r\n    width: 66%;\r\n    height: 60%;\r\n    right: 0;\r\n    bottom: 0;\r\n    background: #364150;\r\n    border: 1px solid #F4AE00;\r\n    padding: 2em;\r\n    transition: all 1s;\r\n}\r\n.nutri-trak-meal.in{\r\n    z-index: 10;\r\n}\r\n.nutri-trak-meal.out{\r\n    z-index: -1;\r\n    left: 200%\r\n}\r\n\r\n.nutrition-meal-wizard{\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n.nutrition-meal-step.in{\r\n    width: 100%;\r\n    height: 70%;\r\n}\r\n\r\n.nutrition-meal-option{\r\n    transition: all 500ms;\r\n}\r\n\r\n.nutrition-meal-step.in .nutrition-meal-option{\r\n    color: black;\r\n    background: #8e8e93;\r\n    border-radius: 0.5em;\r\n    font-size: 2em;\r\n    margin: 0.1em;\r\n    padding: 0.1em;\r\n    text-align: center;\r\n    opacity: 0.3;\r\n}\r\n\r\n.nutrition-meal-step.in .nutrition-meal-option.selected{\r\n    opacity: 1;\r\n}\r\n\r\n.nutrition-step-title{\r\n    transition: all 500ms;\r\n}\r\n\r\n.nutrition-meal-step.in .nutrition-step-title{\r\n    font-size: 3em;\r\n    padding: 1em;\r\n    text-align: center;\r\n}\r\n\r\n.nutrition-meal-step.out .nutrition-meal-option{\r\n    height:0;\r\n    width:0;\r\n    opacity: 0;\r\n}\r\n\r\n.nutrition-meal-step.out .nutrition-step-title{\r\n    font-size: 2em;\r\n    padding: 0.1em;\r\n    text-align: center;\r\n}\r\n\r\n.nutrition-meal-step.out .nutrition-step-next-btn{\r\n    height: 0;\r\n    width: 0;\r\n    opacity: 0;\r\n}\r\n\r\n.nutritional-meal-step.out{\r\n    height: 8%;\r\n    overflow: hidden;\r\n}\r\n\r\n.nutri-trak-score{\r\n    font-size: 3em;\r\n    margin-left: 1em;\r\n    margin-top: 0.2em;\r\n}\r\n\r\n.nutri-trak-score .score{\r\n    display: inline-block;\r\n    margin-right: 1em;\r\n    margin-top: 0.3em;\r\n    float: right;\r\n    cursor: help;\r\n}\r\n.score span{\r\n    font-size: 0.6em;\r\n}\r\n.nutri-trak-score .logo{\r\n    background-image: url(" + __webpack_require__(207) + ");\r\n    width: 6em;\r\n    height: 2.5em;\r\n    display: inline-block;\r\n    background-position-y: 0.2em;\r\n    position: relative;\r\n}\r\n.logo-text{\r\n    position: absolute;\r\n    bottom: -10%;\r\n    left: 34%;\r\n}\r\n.avatar{\r\n    background-image: url(" + __webpack_require__(208) + ");\r\n    border-radius: 1em;\r\n    width: 2em;\r\n    height: 2em;\r\n    display: inline-block;\r\n}\r\n\r\n.morning-span{\r\n    position: absolute;\r\n    top: 1.5em;\r\n    left: 5em;\r\n    width: 3em;\r\n}\r\n\r\n.month-details-popup{\r\n    position: absolute;\r\n    right: 0;\r\n    background: #364150;\r\n    z-index: 1;\r\n    border-radius: 0.2em;\r\n    border: 2px dashed #2C3543;\r\n    transition: opacity 200ms, width 700ms;\r\n}\r\n.month-details-popup.in{\r\n    width: 30%;\r\n}\r\n.month-details-popup.out{\r\n    width: 0;\r\n    opacity: 0;\r\n}\r\n\r\n@keyframes pass {\r\n    from {transform: scale(0.5);}\r\n    to {transform: scale(1);}\r\n}\r\n\r\n.turn-indicator.pulse{\r\n    animation: pass 1s infinite;\r\n    animation-direction: alternate;\r\n    cursor: pointer;\r\n}\r\n\r\n", ""]);
+	exports.push([module.id, "body{\r\n    overflow: hidden;\r\n    color: #8e8e93;\r\n}\r\n\r\n.gainlife-app{\r\n    height: 100%;\r\n    background: #2C3543;\r\n}\r\n\r\n.ui-frame{\r\n    height: 100%;\r\n    overflow: hidden;\r\n}\r\n\r\n.ui-frame .inline-div{\r\n    display: inline-block;\r\n    vertical-align: middle;\r\n}\r\n\r\n.icon{\r\n    background-repeat: no-repeat;\r\n    background-size: contain;\r\n    width: 4em;\r\n    height: 4em;\r\n}\r\n\r\n.nutri-trak-score{\r\n    font-size: 3em;\r\n    margin-left: 1em;\r\n    margin-top: 0.2em;\r\n}\r\n\r\n.nutri-trak-score .score{\r\n    display: inline-block;\r\n    margin-right: 1em;\r\n    margin-top: 0.3em;\r\n    float: right;\r\n    cursor: help;\r\n}\r\n\r\n.score span{\r\n    font-size: 0.6em;\r\n}\r\n\r\n.nutri-trak-score .logo{\r\n    background-image: url(" + __webpack_require__(207) + ");\r\n    width: 6em;\r\n    height: 2.5em;\r\n    display: inline-block;\r\n    background-position-y: 0.2em;\r\n    position: relative;\r\n}\r\n\r\n.logo-text{\r\n    position: absolute;\r\n    bottom: -10%;\r\n    left: 34%;\r\n}\r\n\r\n.avatar{\r\n    background-image: url(" + __webpack_require__(208) + ");\r\n    border-radius: 1em;\r\n    width: 2em;\r\n    height: 2em;\r\n    display: inline-block;\r\n}\r\n\r\n.morning-span{\r\n    position: absolute;\r\n    top: 1.5em;\r\n    left: 5em;\r\n    width: 3em;\r\n}\r\n\r\n\r\n@keyframes pass {\r\n    from {transform: scale(0.5);}\r\n    to {transform: scale(1);}\r\n}\r\n\r\n.turn-indicator.pulse{\r\n    animation: pass 1s infinite;\r\n    animation-direction: alternate;\r\n    cursor: pointer;\r\n}\r\n\r\n", ""]);
 	
 	// exports
 
@@ -24973,19 +24942,21 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.getMealReport = exports.getMonthReport = exports.getDayDetails = exports.getNutritionMealView = exports.getNutritionDayView = exports.getNutritionCalendarView = undefined;
+	exports.getMonthScore = exports.getMonthReport = exports.getNutritionCalendarView = undefined;
 	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _UIManagerActions = __webpack_require__(196);
+	__webpack_require__(219);
 	
-	var _Util = __webpack_require__(178);
+	var _Day = __webpack_require__(214);
 	
 	var _Constants = __webpack_require__(177);
 	
 	var _Constants2 = _interopRequireDefault(_Constants);
+	
+	var _Util = __webpack_require__(178);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -25004,7 +24975,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: getDayClassName(nutritionDay, nutritionSelectedDay) },
-	                nutritionDay.day === (nutritionSelectedDay && nutritionSelectedDay.day) ? getNutritionDayView(nutritionDay, activeView, onAddMealClicked, onGotoCalendarClicked) : null,
+	                nutritionDay.day === (nutritionSelectedDay && nutritionSelectedDay.day) ? (0, _Day.getNutritionDayView)(nutritionDay, activeView, onAddMealClicked, onGotoCalendarClicked) : null,
 	                nutritionDay.day <= new Date().getDate() ? _react2.default.createElement(
 	                    'div',
 	                    { className: 'nutrition-day-bar', onClick: function onClick() {
@@ -25018,7 +24989,7 @@
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'nutrition-day-bar-rating' },
-	                        nutritionDay.rating
+	                        nutritionDay.rating.toFixed(1)
 	                    )
 	                ) : _react2.default.createElement(
 	                    'div',
@@ -25033,7 +25004,7 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'nutrition-day-detail ' + (showDayDetails && showDayDetails.day === nutritionDay.day ? 'in' : 'out') },
-	                    getDayDetails(nutritionDay)
+	                    (0, _Day.getDayDetails)(nutritionDay)
 	                )
 	            );
 	        })
@@ -25048,61 +25019,49 @@
 	    return className;
 	};
 	
-	var getNutritionDayView = exports.getNutritionDayView = function getNutritionDayView(nutritionDay, activeView, onAddMealClicked, onGotoCalendarClicked, onShowMealDetails, onHideMealDetails) {
-	    var previousMealValues = 0;
+	var getMonthReport = exports.getMonthReport = function getMonthReport(month) {
 	    return _react2.default.createElement(
 	        'div',
-	        { className: 'nutrition-day-view' },
-	        _react2.default.createElement(
-	            'div',
-	            { className: 'nutrition-day-left' },
-	            nutritionDay.meals.map(function (meal) {
-	                var leftPadding = previousMealValues;
-	                previousMealValues += getMealRating(meal);
-	                return _react2.default.createElement('div', { className: 'nutrition-meal', onMouseEnter: function onMouseEnter() {
-	                        return onShowMealDetails(meal);
-	                    }, onMouseLeave: function onMouseLeave() {
-	                        return onHideMealDetails(meal);
-	                    },
-	                    style: { width: getMealRating(meal) + '%', marginLeft: leftPadding + '%', marginTop: meal[0].hours / 24 * 8 + '%' } });
-	            })
-	        ),
-	        _react2.default.createElement(
-	            'div',
-	            { className: 'nutrition-day-right' },
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'nutrition-day-time-bar' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'nutrition-day-icon icon' },
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'morning-span' },
-	                        '6 am'
-	                    )
-	                ),
-	                new Date().getDate() === nutritionDay.day ? _react2.default.createElement('div', { className: 'nutrition-meal-btn icon ' + (activeView === 'meal' ? 'cancel' : ''), style: { top: getPercentFromTimeOfDay(new Date()) + '%' }, onClick: function onClick() {
-	                        return onAddMealClicked();
-	                    } }) : null,
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'nutrition-night-icon icon' },
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'morning-span' },
-	                        '10 pm'
-	                    )
-	                ),
-	                _react2.default.createElement('div', { className: 'nutrition-day-back-btn icon', onClick: onGotoCalendarClicked })
-	            )
-	        )
+	        { style: { fontSize: '0.6em', padding: '1em' } },
+	        'Your drive score is an average of your daily scores. To raise this, get better daily scores. Click on a day to see a score breakdown.'
 	    );
 	};
 	
-	var getPercentFromTimeOfDay = function getPercentFromTimeOfDay(date) {
-	    return date.getHours() / 24 * 100 * 0.65;
+	var getMonthScore = exports.getMonthScore = function getMonthScore(month) {
+	    var monthRating = 0;
+	    var activeDays = 0;
+	    month.forEach(function (day) {
+	        var dayRateing = (0, _Day.getDayRating)(day);
+	        if (dayRateing) {
+	            activeDays++;
+	            monthRating += dayRateing;
+	        }
+	    });
+	    return (monthRating / month.length).toFixed(1);
 	};
+
+/***/ },
+/* 211 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.getMealReport = exports.getMealRating = exports.getMealCounts = exports.getNutritionMealView = undefined;
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	__webpack_require__(215);
+	
+	var _Constants = __webpack_require__(177);
+	
+	var _Constants2 = _interopRequireDefault(_Constants);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var getNutritionMealView = exports.getNutritionMealView = function getNutritionMealView(day, activeStep, activeMeal, onMealOptionAdded, onNextMealStepClicked, onMealStepSelected) {
 	    return _react2.default.createElement(
@@ -25142,8 +25101,22 @@
 	    }).length > 0;
 	};
 	
-	var getMealRating = function getMealRating(meal) {
-	    var mealCounts = (0, _Util.getMealCounts)(meal);
+	var getMealCounts = exports.getMealCounts = function getMealCounts(meal) {
+	    var counts = {
+	        protein: 0,
+	        fats: 0,
+	        veg: 0,
+	        drink: 0,
+	        carbs: 0
+	    };
+	    meal.forEach(function (mealOption) {
+	        counts[mealOption.type] += mealOption.count;
+	    });
+	    return counts;
+	};
+	
+	var getMealRating = exports.getMealRating = function getMealRating(meal) {
+	    var mealCounts = getMealCounts(meal);
 	    var mealRating = 0;
 	    Object.keys(_Constants2.default.dailyTargets).forEach(function (type) {
 	        mealRating += mealCounts[type];
@@ -25151,63 +25124,18 @@
 	    return mealRating / 19 * 100;
 	};
 	
-	//TODO, showing meal bonus/penalties and info;;;;;;; change day detail show to be on click, when in day view only
-	//TODO Scores needs rounding and to be accurate 1-10
-	var getDayDetails = exports.getDayDetails = function getDayDetails(day) {
-	    return _react2.default.createElement(
-	        'div',
-	        null,
-	        'The Day Stats',
-	        Object.keys(_Constants2.default.dailyTargets).map(function (type) {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                type,
-	                ': ',
-	                day[type],
-	                ' / ',
-	                _Constants2.default.dailyTargets[type]
-	            );
-	        })
-	    );
-	};
-	
-	var getMonthReport = exports.getMonthReport = function getMonthReport(month) {
-	    return _react2.default.createElement(
-	        'div',
-	        { style: { fontSize: '0.6em', padding: '1em' } },
-	        'Your drive score is an average of your daily scores. To raise this, get better daily scores. Click on a day to see a score breakdown.'
-	    );
-	};
-	
 	var getMealReport = exports.getMealReport = function getMealReport(meal) {
 	    return _react2.default.createElement('div', null);
 	};
-	
-	//TODO add meal details click showing bonus/penalties, do meal styles
-	//TODO add a bunch of test foods
-	
-	//TODO MealBuilder rules: -----------
-	//TODO add water tracking to meal builder
-	//TODO add free (recharge meal) checkbox to meal builder, (gray out when appropriate)
-	//TODO Protein is required
-	//TODO Protein requires min 1 carb or veg
-	//TODO add extra advice text with an info button hover
-	//TODO penalty for eating 1st meal too late
-	//TODO add veg 3 minimum back
-	//TODO bonus for 5 or 6 meals
-	//TODO add meal button is disabled if you have eaten too recently, with click tooltip to explain
-	//TODO show bonuses/penalties during meal builder
-	//TODO ------------------
 
 /***/ },
-/* 211 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(212);
+	var content = __webpack_require__(213);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(209)(content, {});
@@ -25227,7 +25155,7 @@
 	}
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(200)();
@@ -25236,6 +25164,234 @@
 	
 	// module
 	exports.push([module.id, "html{\r\n    height: 100%;\r\n}\r\n\r\nbody {\r\n    font-family: Hind, Helvetica, Arial, sans-serif;\r\n    font-size: 10px;\r\n    font-weight: bold;\r\n    -webkit-font-smoothing: antialiased;\r\n    -moz-font-smoothing: antialiased;\r\n    -o-font-smoothing: antialiased;\r\n    background-color: #ffffff;\r\n    margin: 0 auto;\r\n    height: 100%;\r\n}\r\n\r\n#appRoot{\r\n    height: 100%;\r\n}", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 214 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.getDayDetails = exports.getDayRating = exports.getNutritionDayView = undefined;
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	__webpack_require__(217);
+	
+	var _Meal = __webpack_require__(211);
+	
+	var _Constants = __webpack_require__(177);
+	
+	var _Constants2 = _interopRequireDefault(_Constants);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var getNutritionDayView = exports.getNutritionDayView = function getNutritionDayView(nutritionDay, activeView, onAddMealClicked, onGotoCalendarClicked, onShowMealDetails, onHideMealDetails) {
+	    var previousMealValues = 0;
+	    return _react2.default.createElement(
+	        'div',
+	        { className: 'nutrition-day-view' },
+	        _react2.default.createElement(
+	            'div',
+	            { className: 'nutrition-day-left' },
+	            nutritionDay.meals.map(function (meal) {
+	                var leftPadding = previousMealValues;
+	                previousMealValues += (0, _Meal.getMealRating)(meal);
+	                return _react2.default.createElement('div', { className: 'nutrition-meal', onMouseEnter: function onMouseEnter() {
+	                        return onShowMealDetails(meal);
+	                    }, onMouseLeave: function onMouseLeave() {
+	                        return onHideMealDetails(meal);
+	                    },
+	                    style: { width: (0, _Meal.getMealRating)(meal) + '%', marginLeft: leftPadding + '%', marginTop: meal[0].hours / 24 * 8 + '%' } });
+	            })
+	        ),
+	        _react2.default.createElement(
+	            'div',
+	            { className: 'nutrition-day-right' },
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'nutrition-day-time-bar' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'nutrition-day-icon icon' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'morning-span' },
+	                        '6 am'
+	                    )
+	                ),
+	                new Date().getDate() === nutritionDay.day ? _react2.default.createElement('div', { className: 'nutrition-meal-btn icon ' + (activeView === 'meal' ? 'cancel' : ''), style: { top: getPercentFromTimeOfDay(new Date()) + '%' }, onClick: function onClick() {
+	                        return onAddMealClicked();
+	                    } }) : null,
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'nutrition-night-icon icon' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'morning-span' },
+	                        '10 pm'
+	                    )
+	                ),
+	                _react2.default.createElement('div', { className: 'nutrition-day-back-btn icon', onClick: onGotoCalendarClicked })
+	            )
+	        )
+	    );
+	};
+	
+	var getPercentFromTimeOfDay = function getPercentFromTimeOfDay(date) {
+	    return date.getHours() / 24 * 100 * 0.65;
+	};
+	
+	var getDayRating = exports.getDayRating = function getDayRating(day) {
+	    var dayRating = 0;
+	    Object.keys(_Constants2.default.dailyTargets).forEach(function (type) {
+	        dayRating += day[type] / _Constants2.default.dailyTargets[type];
+	    });
+	    return dayRating;
+	};
+	
+	var getDayDetails = exports.getDayDetails = function getDayDetails(day) {
+	    return _react2.default.createElement(
+	        'div',
+	        null,
+	        'The Day Stats',
+	        Object.keys(_Constants2.default.dailyTargets).map(function (type) {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                type,
+	                ': ',
+	                day[type],
+	                ' / ',
+	                _Constants2.default.dailyTargets[type]
+	            );
+	        })
+	    );
+	};
+
+/***/ },
+/* 215 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(216);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(209)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./Meal.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./Meal.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 216 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(200)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\r\n.nutrition-meal{\r\n    background: saddlebrown;\r\n    height: 8%;\r\n}\r\n\r\n.nutrition-step-next-btn.add-meal{\r\n    background-image: url(" + __webpack_require__(206) + ");\r\n    cursor: pointer;\r\n}\r\n\r\n.nutri-trak-meal{\r\n    position: absolute;\r\n    top: -21%;\r\n    left: 0;\r\n    margin: auto;\r\n    width: 66%;\r\n    height: 60%;\r\n    right: 0;\r\n    bottom: 0;\r\n    background: #364150;\r\n    border: 1px solid #F4AE00;\r\n    padding: 2em;\r\n    transition: all 1s;\r\n}\r\n.nutri-trak-meal.in{\r\n    z-index: 10;\r\n}\r\n.nutri-trak-meal.out{\r\n    z-index: -1;\r\n    left: 200%\r\n}\r\n\r\n.nutrition-meal-wizard{\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n.nutrition-meal-step.in{\r\n    width: 100%;\r\n    height: 70%;\r\n}\r\n\r\n.nutrition-meal-option{\r\n    transition: all 500ms;\r\n}\r\n\r\n.nutrition-meal-step.in .nutrition-meal-option{\r\n    color: black;\r\n    background: #8e8e93;\r\n    border-radius: 0.5em;\r\n    font-size: 2em;\r\n    margin: 0.1em;\r\n    padding: 0.1em;\r\n    text-align: center;\r\n    opacity: 0.3;\r\n}\r\n\r\n.nutrition-meal-step.in .nutrition-meal-option.selected{\r\n    opacity: 1;\r\n}\r\n\r\n.nutrition-step-title{\r\n    transition: all 500ms;\r\n}\r\n\r\n.nutrition-meal-step.in .nutrition-step-title{\r\n    font-size: 3em;\r\n    padding: 1em;\r\n    text-align: center;\r\n}\r\n\r\n.nutrition-meal-step.out .nutrition-meal-option{\r\n    height:0;\r\n    width:0;\r\n    opacity: 0;\r\n}\r\n\r\n.nutrition-meal-step.out .nutrition-step-title{\r\n    font-size: 2em;\r\n    padding: 0.1em;\r\n    text-align: center;\r\n}\r\n\r\n.nutrition-meal-step.out .nutrition-step-next-btn{\r\n    height: 0;\r\n    width: 0;\r\n    opacity: 0;\r\n}\r\n\r\n.nutritional-meal-step.out{\r\n    height: 8%;\r\n    overflow: hidden;\r\n}\r\n.nutrition-step-next-btn{\r\n    background-image: url(" + __webpack_require__(205) + ");\r\n    cursor: pointer;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    margin-top: 1em;\r\n}\r\n\r\n.cancel{\r\n    transform: rotate(45deg);\r\n}", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(218);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(209)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./Day.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./Day.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 218 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(200)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".nutri-trak-day{\r\n    background: #5F8295;\r\n    transition: all 1s;\r\n}\r\n.nutri-trak-day.in{\r\n\r\n}\r\n.nutri-trak-day.out{\r\n    opacity: 0;\r\n\r\n}\r\n\r\n.calendar-view{\r\n    height: 100%;\r\n}\r\n\r\n.nutrition-day{\r\n    display: inline-block;\r\n    border: 1px solid #364150;\r\n    position: relative;\r\n    transition: all 500ms;\r\n    width: 14%;\r\n    height: 18%;\r\n}\r\n\r\n.nutrition-day.label{\r\n    font-size: 2em;\r\n    height: auto;\r\n    border: none;\r\n    text-align: center;\r\n    margin-bottom: 1em;\r\n}\r\n\r\n.nutrition-day.past{\r\n    opacity: 0.3;\r\n}\r\n\r\n.nutrition-day.maximized{\r\n    height: 92%;\r\n    width: 100%;\r\n    border: none;\r\n    opacity: 1;\r\n}\r\n.nutrition-day.minimized{\r\n    opacity: 0;\r\n    height: 0;\r\n    width: 0;\r\n    overflow: hidden;\r\n}\r\n\r\n.nutrition-day-bar-rating{\r\n    font-size: 3em;\r\n    position: absolute;\r\n    right: 0;\r\n    left: 0;\r\n    margin: auto;\r\n    width: 1em;\r\n    top: 0;\r\n    bottom: 0;\r\n    height: 1em;\r\n}\r\n\r\n.nutrition-day-bar{\r\n    height: 100%;\r\n    position: relative;\r\n    width: 83%;\r\n    cursor: pointer;\r\n}\r\n\r\n.nutrition-day.maximized .nutrition-day-bar{\r\n    height: 25%;\r\n    border: 1px solid #F4AE00;\r\n}\r\n\r\n.nutrition-day-bar-bar{\r\n    height: 100%;\r\n}\r\n\r\n.nutrition-day-detail{\r\n    transition: height 800ms, opacity 500ms;\r\n    position: absolute;\r\n    overflow: hidden;\r\n}\r\n.nutrition-day-detail.out{\r\n    opacity: 0;\r\n    height: 0;\r\n}\r\n.nutrition-day-detail.in{\r\n    opacity: 1;\r\n    height: 100%;\r\n}\r\n\r\n\r\n.nutrition-day-view{\r\n    height: 75%;\r\n    margin-bottom: 2em;\r\n}\r\n.nutrition-day-left{\r\n    display: inline-block;\r\n    width: 100%;\r\n    height: 100%;\r\n    background: #364150;\r\n    border: 1px solid #F4AE00;\r\n    overflow: hidden;\r\n}\r\n.nutrition-day-right{\r\n    position: absolute;\r\n    width: 10%;\r\n    top: 0;\r\n    height: 100%;\r\n    right: 0;\r\n}\r\n\r\n.nutrition-day-icon{\r\n    background-image: url(" + __webpack_require__(201) + ");\r\n    position: absolute;\r\n    top: 4%;\r\n    opacity: 0.3;\r\n}\r\n\r\n.nutrition-night-icon{\r\n    background-image: url(" + __webpack_require__(202) + ");\r\n    position: absolute;\r\n    bottom: 29%;\r\n    opacity: 0.3;\r\n}\r\n\r\n.nutrition-day-back-btn{\r\n    background-image: url(" + __webpack_require__(203) + ");\r\n    position: absolute;\r\n    bottom: 5%;\r\n    cursor: pointer;\r\n    z-index: 10;\r\n}\r\n\r\n.nutrition-meal-btn{\r\n    background-image: url(" + __webpack_require__(204) + ");\r\n    cursor: pointer;\r\n    transition: all 1s;\r\n}\r\n\r\n.nutrition-day-time-bar{\r\n    width: 100%;\r\n    height: 100%;\r\n    position: relative;\r\n    overflow: hidden;\r\n}\r\n.nutrition-meal-btn{\r\n    position: absolute;\r\n}", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(220);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(209)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./Month.css", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./Month.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(200)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "\r\n.nutri-trak-calendar{\r\n    margin: 3em;\r\n    margin-top: 0;\r\n    padding: 2em;\r\n    border: solid #364150 2px;\r\n    border-radius: 0.5em;\r\n    height: calc(100% - 15em);\r\n    overflow:hidden;\r\n}\r\n\r\n.month-details-popup{\r\n    position: absolute;\r\n    right: 0;\r\n    background: #364150;\r\n    z-index: 1;\r\n    border-radius: 0.2em;\r\n    border: 2px dashed #2C3543;\r\n    transition: opacity 200ms, width 700ms;\r\n}\r\n.month-details-popup.in{\r\n    width: 30%;\r\n}\r\n.month-details-popup.out{\r\n    width: 0;\r\n    opacity: 0;\r\n}", ""]);
 	
 	// exports
 

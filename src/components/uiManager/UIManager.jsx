@@ -1,8 +1,10 @@
 import React from 'react';
 import './UIManager.css';
-import { getNutritionCalendarView, getNutritionMealView, getMonthReport } from './UIManagerHelper.js';
+import { getNutritionCalendarView, getMonthReport } from '../nutritionMonth/Month.jsx';
+import { getNutritionMealView } from '../nutritionMeal/Meal.jsx';
 import { loadNutritionCalendar } from './UIManagerActions.js';
-import { getMonthScore, getColorFromRating } from  '../Util.js';
+import { getMonthScore } from  '../nutritionMonth/Month.jsx';
+import { getColorFromRating } from '../Util.js';
 import Constants from '../Constants.js';
 
 class UIManager extends React.Component {

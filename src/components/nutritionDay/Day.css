@@ -1,0 +1,150 @@
+.nutri-trak-day{
+    background: #5F8295;
+    transition: all 1s;
+}
+.nutri-trak-day.in{
+
+}
+.nutri-trak-day.out{
+    opacity: 0;
+
+}
+
+.calendar-view{
+    height: 100%;
+}
+
+.nutrition-day{
+    display: inline-block;
+    border: 1px solid #364150;
+    position: relative;
+    transition: all 500ms;
+    width: 14%;
+    height: 18%;
+}
+
+.nutrition-day.label{
+    font-size: 2em;
+    height: auto;
+    border: none;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.nutrition-day.past{
+    opacity: 0.3;
+}
+
+.nutrition-day.maximized{
+    height: 92%;
+    width: 100%;
+    border: none;
+    opacity: 1;
+}
+.nutrition-day.minimized{
+    opacity: 0;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+.nutrition-day-bar-rating{
+    font-size: 3em;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 1em;
+    top: 0;
+    bottom: 0;
+    height: 1em;
+}
+
+.nutrition-day-bar{
+    height: 100%;
+    position: relative;
+    width: 83%;
+    cursor: pointer;
+}
+
+.nutrition-day.maximized .nutrition-day-bar{
+    height: 25%;
+    border: 1px solid #F4AE00;
+}
+
+.nutrition-day-bar-bar{
+    height: 100%;
+}
+
+.nutrition-day-detail{
+    transition: height 800ms, opacity 500ms;
+    position: absolute;
+    overflow: hidden;
+}
+.nutrition-day-detail.out{
+    opacity: 0;
+    height: 0;
+}
+.nutrition-day-detail.in{
+    opacity: 1;
+    height: 100%;
+}
+
+
+.nutrition-day-view{
+    height: 75%;
+    margin-bottom: 2em;
+}
+.nutrition-day-left{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: #364150;
+    border: 1px solid #F4AE00;
+    overflow: hidden;
+}
+.nutrition-day-right{
+    position: absolute;
+    width: 10%;
+    top: 0;
+    height: 100%;
+    right: 0;
+}
+
+.nutrition-day-icon{
+    background-image: url('../../../img/sun.png');
+    position: absolute;
+    top: 4%;
+    opacity: 0.3;
+}
+
+.nutrition-night-icon{
+    background-image: url('../../../img/moon.png');
+    position: absolute;
+    bottom: 29%;
+    opacity: 0.3;
+}
+
+.nutrition-day-back-btn{
+    background-image: url('../../../img/calendar.png');
+    position: absolute;
+    bottom: 5%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.nutrition-meal-btn{
+    background-image: url('../../../img/add.png');
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.nutrition-day-time-bar{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.nutrition-meal-btn{
+    position: absolute;
+}

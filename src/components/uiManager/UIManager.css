@@ -18,277 +18,11 @@ body{
     vertical-align: middle;
 }
 
-.nutri-trak-calendar{
-    margin: 3em;
-    margin-top: 0;
-    padding: 2em;
-    border: solid #364150 2px;
-    border-radius: 0.5em;
-    height: calc(100% - 15em);
-    overflow:hidden;
-}
-
-.nutri-trak-day{
-    background: #5F8295;
-    transition: all 1s;
-}
-.nutri-trak-day.in{
-
-}
-.nutri-trak-day.out{
-    opacity: 0;
-
-}
-
-.calendar-view{
-    height: 100%;
-}
-
-.nutrition-day{
-    display: inline-block;
-    border: 1px solid #364150;
-    position: relative;
-    transition: all 500ms;
-    width: 14%;
-    height: 18%;
-}
-
-.nutrition-day.label{
-    font-size: 2em;
-    height: auto;
-    border: none;
-    text-align: center;
-    margin-bottom: 1em;
-}
-
-.nutrition-day.past{
-    opacity: 0.3;
-}
-
-.nutrition-day.maximized{
-    height: 92%;
-    width: 100%;
-    border: none;
-    opacity: 1;
-}
-.nutrition-day.minimized{
-    opacity: 0;
-    height: 0;
-    width: 0;
-    overflow: hidden;
-}
-
-.nutrition-day-bar-rating{
-    font-size: 3em;
-    position: absolute;
-    right: 0;
-    left: 0;
-    margin: auto;
-    width: 1em;
-    top: 0;
-    bottom: 0;
-    height: 1em;
-}
-
-.nutrition-day-bar{
-    height: 100%;
-    position: relative;
-    width: 83%;
-    cursor: pointer;
-}
-
-.nutrition-day.maximized .nutrition-day-bar{
-    height: 25%;
-    border: 1px solid #F4AE00;
-}
-
-.nutrition-day-bar-bar{
-    height: 100%;
-}
-
-.nutrition-day-detail{
-    transition: height 800ms, opacity 500ms;
-    position: absolute;
-    overflow: hidden;
-}
-.nutrition-day-detail.out{
-    opacity: 0;
-    height: 0;
-}
-.nutrition-day-detail.in{
-    opacity: 1;
-    height: 100%;
-}
-
-
-.nutrition-day-view{
-    height: 75%;
-    margin-bottom: 2em;
-}
-.nutrition-day-left{
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    background: #364150;
-    border: 1px solid #F4AE00;
-    overflow: hidden;
-}
-.nutrition-day-right{
-    position: absolute;
-    width: 10%;
-    top: 0;
-    height: 100%;
-    right: 0;
-}
-.nutrition-meal{
-    background: saddlebrown;
-    height: 8%;
-}
-
-.nutrition-day-time-bar{
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-}
-.nutrition-meal-btn{
-    position: absolute;
-}
-
 .icon{
     background-repeat: no-repeat;
     background-size: contain;
     width: 4em;
     height: 4em;
-}
-
-.nutrition-day-icon{
-    background-image: url('../../../img/sun.png');
-    position: absolute;
-    top: 4%;
-    opacity: 0.3;
-}
-
-.nutrition-night-icon{
-    background-image: url('../../../img/moon.png');
-    position: absolute;
-    bottom: 29%;
-    opacity: 0.3;
-}
-
-.nutrition-day-back-btn{
-    background-image: url('../../../img/calendar.png');
-    position: absolute;
-    bottom: 5%;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.nutrition-meal-btn{
-    background-image: url('../../../img/add.png');
-    cursor: pointer;
-    transition: all 1s;
-}
-
-.nutrition-step-next-btn{
-    background-image: url('../../../img/down.png');
-    cursor: pointer;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1em;
-}
-
-.cancel{
-    transform: rotate(45deg);
-}
-
-.nutrition-step-next-btn.add-meal{
-    background-image: url('../../../img/ok.png');
-    cursor: pointer;
-}
-
-.nutri-trak-meal{
-    position: absolute;
-    top: -21%;
-    left: 0;
-    margin: auto;
-    width: 66%;
-    height: 60%;
-    right: 0;
-    bottom: 0;
-    background: #364150;
-    border: 1px solid #F4AE00;
-    padding: 2em;
-    transition: all 1s;
-}
-.nutri-trak-meal.in{
-    z-index: 10;
-}
-.nutri-trak-meal.out{
-    z-index: -1;
-    left: 200%
-}
-
-.nutrition-meal-wizard{
-    width: 100%;
-    height: 100%;
-}
-
-.nutrition-meal-step.in{
-    width: 100%;
-    height: 70%;
-}
-
-.nutrition-meal-option{
-    transition: all 500ms;
-}
-
-.nutrition-meal-step.in .nutrition-meal-option{
-    color: black;
-    background: #8e8e93;
-    border-radius: 0.5em;
-    font-size: 2em;
-    margin: 0.1em;
-    padding: 0.1em;
-    text-align: center;
-    opacity: 0.3;
-}
-
-.nutrition-meal-step.in .nutrition-meal-option.selected{
-    opacity: 1;
-}
-
-.nutrition-step-title{
-    transition: all 500ms;
-}
-
-.nutrition-meal-step.in .nutrition-step-title{
-    font-size: 3em;
-    padding: 1em;
-    text-align: center;
-}
-
-.nutrition-meal-step.out .nutrition-meal-option{
-    height:0;
-    width:0;
-    opacity: 0;
-}
-
-.nutrition-meal-step.out .nutrition-step-title{
-    font-size: 2em;
-    padding: 0.1em;
-    text-align: center;
-}
-
-.nutrition-meal-step.out .nutrition-step-next-btn{
-    height: 0;
-    width: 0;
-    opacity: 0;
-}
-
-.nutritional-meal-step.out{
-    height: 8%;
-    overflow: hidden;
 }
 
 .nutri-trak-score{
@@ -304,9 +38,11 @@ body{
     float: right;
     cursor: help;
 }
+
 .score span{
     font-size: 0.6em;
 }
+
 .nutri-trak-score .logo{
     background-image: url('../../../img/mu-logo-dark.png');
     width: 6em;
@@ -315,11 +51,13 @@ body{
     background-position-y: 0.2em;
     position: relative;
 }
+
 .logo-text{
     position: absolute;
     bottom: -10%;
     left: 34%;
 }
+
 .avatar{
     background-image: url('../../../img/user.png');
     border-radius: 1em;
@@ -335,22 +73,6 @@ body{
     width: 3em;
 }
 
-.month-details-popup{
-    position: absolute;
-    right: 0;
-    background: #364150;
-    z-index: 1;
-    border-radius: 0.2em;
-    border: 2px dashed #2C3543;
-    transition: opacity 200ms, width 700ms;
-}
-.month-details-popup.in{
-    width: 30%;
-}
-.month-details-popup.out{
-    width: 0;
-    opacity: 0;
-}
 
 @keyframes pass {
     from {transform: scale(0.5);}
