@@ -36,7 +36,7 @@ class UIManager extends React.Component {
                 </div>
                 <div className={'nutri-trak-calendar '+(this.props.viewState.activeView === 'month' ? 'in' : 'out')}>
                     { this.props.viewState.nutritionMonth ? getNutritionCalendarView(this.props.viewState.nutritionMonth, this.props.viewState.nutritionDay, this.props.viewState.activeMeal,
-                        this.props.viewState.activeDayDetails, this.props.viewState.activeView,
+                        this.props.viewState.activeDayDetails, this.props.viewState.activeMealDetails, this.props.viewState.activeView,
                         this.props.onDayClicked, this.props.onAddMealClicked, this.props.onGotoCalendarClicked, this.props.onShowMealDetails,
                         this.props.onHideMealDetails, this.props.onShowDayDetails, this.props.onHideDayDetails) : null }
                 </div>

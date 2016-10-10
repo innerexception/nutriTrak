@@ -7,7 +7,7 @@
 }
 .nutri-trak-day.out{
     opacity: 0;
-
+    pointer-events: none;
 }
 
 .calendar-view{
@@ -79,15 +79,25 @@
 .nutrition-day-detail{
     transition: height 800ms, opacity 500ms;
     position: absolute;
-    overflow: hidden;
+    bottom: 27%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: #364150;
+    border: 2px dashed #2C3543;
+    border-radius: 0.5em;
+    padding: 1em;
+    width: 50%;
+    font-size: 2em;
 }
 .nutrition-day-detail.out{
     opacity: 0;
     height: 0;
+    pointer-events: none;
 }
 .nutrition-day-detail.in{
     opacity: 1;
-    height: 100%;
+    height: 50%;
 }
 
 
@@ -137,6 +147,17 @@
     background-image: url('../../../img/add.png');
     cursor: pointer;
     transition: all 1s;
+}
+
+.down-arrow{
+    background-image: url('../../../img/triangle.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 4em;
+    height: 4em;
+    position: absolute;
+    bottom: -17%;
+
 }
 
 .nutrition-day-time-bar{

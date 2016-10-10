@@ -27,9 +27,6 @@ const mapDispatchToProps = (dispatch) => {
         onShowMealDetails: (meal) => {
             dispatch(showMealDetails(meal))
         },
-        onHideMealDetails: () => {
-            dispatch(hideMealDetails());
-        },
         onShowDayDetails: (day) => {
             dispatch(showDayDetails(day))
         },

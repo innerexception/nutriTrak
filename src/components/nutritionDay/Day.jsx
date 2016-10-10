@@ -1,9 +1,9 @@
 import React from 'react';
 import './Day.css'
-import { getMealRating } from '../nutritionMeal/Meal.jsx';
+import { getMealRating, getMealDetails } from '../nutritionMeal/Meal.jsx';
 import Constants from '../Constants.js';
 
-export const getNutritionDayView = (nutritionDay, activeView, onAddMealClicked, onGotoCalendarClicked, onShowMealDetails, onHideMealDetails) => {
+export const getNutritionDayView = (nutritionDay, activeView, showMealDetails, onAddMealClicked, onGotoCalendarClicked, onShowMealDetails) => {
     let previousMealValues = 0;
     return (
         <div className='nutrition-day-view'>
@@ -11,8 +11,13 @@ export const getNutritionDayView = (nutritionDay, activeView, onAddMealClicked, 
                 { nutritionDay.meals.map((meal) => {
                     let leftPadding = previousMealValues;
                     previousMealValues+=getMealRating(meal);
-                    return <div className='nutrition-meal' onMouseEnter={()=>onShowMealDetails(meal)} onMouseLeave={()=>onHideMealDetails(meal)}
-                                style={{width: getMealRating(meal)+'%', marginLeft: (leftPadding)+'%', marginTop: ((meal[0].hours/24)*8)+'%'}}></div>
+                    return <div className='nutrition-meal' onClick={()=>onShowMealDetails(meal)}
+                                style={{width: getMealRating(meal)+'%', marginLeft: (leftPadding)+'%', marginTop: ((meal[0].hours/24)*8)+'%'}}>
+                                <div className={'nutrition-meal-detail '+(showMealDetails && showMealDetails === meal ? 'in' : 'out')}>
+                                    { getMealDetails(meal) }
+                                    <div className='down-arrow'></div>
+                                </div>
+                            </div>
                 }) }
             </div>
             <div className='nutrition-day-right'>
@@ -40,9 +45,20 @@ export const getDayRating = (day) => {
     return dayRating;
 };
 
+//TODO, showing meal bonus/penalties and info
 export const getDayDetails = (day) =>
-    <div>The Day Stats
+    <div>
+        Today so far:
         { Object.keys(Constants.dailyTargets).map((type) => {
-            return <div>{type}: {day[type]} / {Constants.dailyTargets[type]}</div>
+            let difference = day[type] - Constants.dailyTargets[type];
+            if(difference > 0 && (type === 'veg' || type === 'drink')) difference = '+'+difference;
+            if(difference < 0 && (type !== 'veg' || type!=='drink')) difference = ''+difference;
+            return <div>{type}: {day[type]} / {Constants.dailyTargets[type]} {difference !== 0 ?
+                        <span style={{color: difference > 0 ? 'green':'red'}}>({difference})</span> :
+                        <span className='checkmark'></span>}
+                   </div>
         })}
+        <div>Meals: {day.meals.length} / 5-6</div>
+        <div className='checkmark'>Ate within an hour of waking</div>
+        <div className='checkmark'>Recharge meals used</div>
     </div>;

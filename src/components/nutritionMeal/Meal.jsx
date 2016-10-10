@@ -42,5 +42,11 @@ export const getMealRating = (meal) => {
     return ((mealRating/19)*100);
 };
 
-export const getMealReport = (meal) =>
-    <div></div>;
+export const getMealDetails = (meal) =>{
+    let mealCounts = getMealCounts(meal);
+   return  <div>
+        { Object.keys(Constants.dailyTargets).map((type) => {
+            return <div className={'meal-item '+type}>{mealCounts[type]}</div>
+        })}
+    </div>;
+};

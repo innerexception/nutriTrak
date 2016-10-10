@@ -103,3 +103,29 @@
 .cancel{
     transform: rotate(45deg);
 }
+
+.meal-item{
+    display: inline-block;
+    margin-left: 0.2em;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 2em;
+    height: 4em;
+    background-position-y: 1.1em;
+    text-align: center;
+}
+.meal-item.protein{
+    background-image: url('../../../img/protein.png');
+}
+.meal-item.veg{
+    background-image: url('../../../img/veg.png');
+}
+.meal-item.carbs{
+    background-image: url('../../../img/carbs.png');
+}
+.meal-item.drink{
+    background-image: url('../../../img/drink.png');
+}
+.meal-item.fats{
+    background-image: url('../../../img/fats.png');
+}

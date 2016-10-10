@@ -18,13 +18,11 @@ const appReducer = (state = {}, action) => {
             viewState.activeMeal.push({name: action.name, type: action.foodType, count: 1, hours: new Date().getHours()});
             return { viewState: {...viewState, activeMeal: viewState.activeMeal}};
         case 'LOAD_MEAL_DETAILS':
-            return { viewState: {...viewState, activeMealDetails: action.meal}};
-        case 'HIDE_MEAL_DETAILS':
-            return { viewState: {...viewState, activeMealDetails: null}};
+            let existingMeal = viewState.activeMealDetails === action.meal ? false : action.meal;
+            return { viewState: {...viewState, activeMealDetails: existingMeal}};
         case 'LOAD_DAY_DETAILS':
-            return { viewState: {...viewState, activeDayDetails: action.day}};
-        case 'HIDE_DAY_DETAILS':
-            return { viewState: {...viewState, activeDayDetails: null}};
+            let existingDay = viewState.activeDayDetails === action.day ? false : action.day;
+            return { viewState: {...viewState, activeDayDetails: existingDay}};
         case 'MEAL_NEXT_STEP':
             return { viewState: updateViewStateActiveMealStep(viewState, action.activeStep)};
         case 'MEAL_SELECT_STEP':

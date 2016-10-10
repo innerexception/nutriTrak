@@ -64,9 +64,9 @@ export default {
                     [{type: 'drink', count: 1, hours: 12}, {type: 'carbs', count: 3}, {type: 'protein', count: 2}]
                 ]
             },
-            { day: 10, month: 3, year: 2016, rating: 8.8, protein: 3, veg: 7, drink: 6, fats: 2, carbs: 5,
+            { day: 10, month: 3, year: 2016, rating: 8.8, protein: 3, veg: 4, drink: 3, fats: 2, carbs: 3,
                 meals: [
-                    [{type: 'protein', count: 1, hours: 6}, {type: 'drink', count: 1}, {type: 'veg', count: 3}, {type: 'fats', count: 1}],
+                    [{type: 'protein', count: 1, hours: 6}, {type: 'drink', count: 1}, {type: 'veg', count: 4}, {type: 'fats', count: 1}],
                     [{type: 'fats', count: 1, hours: 11}, {type: 'drink', count: 1}],
                     [{type: 'drink', count: 1, hours: 16}, {type: 'carbs', count: 3}, {type: 'protein', count: 2}]
                 ]
@@ -107,7 +107,8 @@ export default {
         protein: 6,
         drink: 8,
         fats: 2,
-        carbs: 3
+        carbs: 3,
+        veg: 3
     },
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 }
