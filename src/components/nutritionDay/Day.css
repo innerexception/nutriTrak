@@ -75,6 +75,7 @@
 
 .nutrition-day-bar-bar{
     height: 100%;
+    transition: all 1s;
 }
 
 .nutrition-day-detail{
@@ -170,6 +171,6 @@
     position: absolute;
 }
 .disabled{
-    opacity: 0.5;
+    opacity: 0.3;
     cursor: default;
 }
