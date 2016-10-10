@@ -11,7 +11,7 @@
 
 .nutri-trak-meal{
     position: absolute;
-    top: -21%;
+    top: -9%;
     left: 0;
     margin: auto;
     width: 66%;
@@ -22,6 +22,7 @@
     border: 1px solid #F4AE00;
     padding: 2em;
     transition: all 1s;
+    overflow: auto;
 }
 .nutri-trak-meal.in{
     z-index: 10;

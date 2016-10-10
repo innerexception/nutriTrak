@@ -1,6 +1,5 @@
 
-//TODO Scores needs to be accurate 1-10
-//TODO add meal details click showing bonus/penalties, do meal styles
+//TODO Scores needs to be accurate 1-10, fix positioning/sizing of meal bars to add button
 //TODO add a bunch of test foods
 
 

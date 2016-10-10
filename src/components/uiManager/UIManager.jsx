@@ -16,7 +16,6 @@ class UIManager extends React.Component {
         this.props.store.dispatch(loadNutritionCalendar(Constants.testUser));
     };
 
-    //TODO Month score on avatar click
     render() {
         return (
             <div className='ui-frame'>

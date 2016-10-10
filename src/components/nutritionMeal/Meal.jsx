@@ -46,7 +46,7 @@ export const getMealDetails = (meal) =>{
     let mealCounts = getMealCounts(meal);
    return  <div>
         { Object.keys(Constants.dailyTargets).map((type) => {
-            return <div className={'meal-item '+type}>{mealCounts[type]}</div>
+            if(mealCounts[type] > 0) return <div className={'meal-item '+type}>{mealCounts[type]}</div>; else return ''
         })}
     </div>;
 };

@@ -73,6 +73,18 @@ body{
     width: 3em;
 }
 
+.checkmark{
+    background-image: url('../../../img/okgreen.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: 50%;
+}
+.checkmark.inline{
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+}
+
 
 @keyframes pass {
     from {transform: scale(0.5);}

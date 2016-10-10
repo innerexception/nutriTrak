@@ -45,7 +45,7 @@ export const getDayRating = (day) => {
     return dayRating;
 };
 
-//TODO, showing meal bonus/penalties and info
+//TODO, convert to table layout
 export const getDayDetails = (day) =>
     <div>
         Today so far:
@@ -55,7 +55,7 @@ export const getDayDetails = (day) =>
             if(difference < 0 && (type !== 'veg' || type!=='drink')) difference = ''+difference;
             return <div>{type}: {day[type]} / {Constants.dailyTargets[type]} {difference !== 0 ?
                         <span style={{color: difference > 0 ? 'green':'red'}}>({difference})</span> :
-                        <span className='checkmark'></span>}
+                        <span className='checkmark inline'></span>}
                    </div>
         })}
         <div>Meals: {day.meals.length} / 5-6</div>
