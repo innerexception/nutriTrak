@@ -16,11 +16,12 @@
 
 .nutrition-day{
     display: inline-block;
-    border: 1px solid #364150;
+    border: 1px dotted #F4AE00;
     position: relative;
     transition: all 500ms;
     width: 14%;
     height: 18%;
+    margin-left: 0.1em;
 }
 
 .nutrition-day.label{
@@ -63,13 +64,13 @@
 .nutrition-day-bar{
     height: 100%;
     position: relative;
-    width: 83%;
     cursor: pointer;
 }
 
 .nutrition-day.maximized .nutrition-day-bar{
     height: 25%;
     border: 1px solid #F4AE00;
+    width: 83%;
 }
 
 .nutrition-day-bar-bar{

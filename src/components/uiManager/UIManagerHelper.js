@@ -1,7 +1,5 @@
 
-//TODO Scores needs to be accurate 1-10, fix positioning/sizing of meal bars to add button
-//TODO add a bunch of test foods
-
+//TODO fix positioning/sizing of meal bars to add button
 
 //TODO MealBuilder rules: -----------
 //TODO add water tracking to meal builder

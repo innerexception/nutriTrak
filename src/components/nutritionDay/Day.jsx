@@ -39,9 +39,10 @@ const getPercentFromTimeOfDay = (date) => {
 export const getDayRating = (day) => {
     let dayRating = 0;
     Object.keys(Constants.dailyTargets).forEach((type) => {
-        dayRating += day[type]/Constants.dailyTargets[type];
+        if(day[type] <= Constants.dailyTargets[type]) dayRating += day[type]/Constants.dailyTargets[type];
+        else dayRating+= 1+ (0.01*(day[type] - Constants.dailyTargets[type]));
     });
-    return dayRating;
+    return (dayRating/5)*10;
 };
 
 //TODO, convert to table layout
@@ -52,8 +53,10 @@ export const getDayDetails = (day) =>
             let difference = day[type] - Constants.dailyTargets[type];
             let color = 'green';
             if(difference > 0 && (type !== 'veg' && type !== 'drink')) color = 'red';
-            if(difference < 0) color = 'red';
-            if(difference > 0) difference = '+'+difference;
+            if(difference < 0){
+                color = 'red'; difference = 'Need '+(-difference)+' more';
+            }
+            if(difference > 0) difference = (type==='carbs' || type === 'fats' ? 'too many, -' : 'more is better, +')+(difference/10);
             return <div>{type}: {day[type]} / {Constants.dailyTargets[type]} {difference !== 0 ?
                         <span style={{color: color}}>({difference})</span> :
                         <span className='checkmark inline'></span>}

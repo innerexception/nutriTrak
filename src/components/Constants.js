@@ -99,11 +99,48 @@ export default {
         ]
     },
     mealSteps: [
-        { title: 'Pick a Protein', type: 'protein', options: [{name: 'Ground Beef'}], isStart: true },
-        { title: 'Pick your Veg', type: 'veg', options: [] },
-        { title: 'To Drink?', type: 'drink', options: [] },
-        { title: 'Choose a Fat', type: 'fats', options: [] },
-        { title: 'Finally, Carbs', type: 'carbs', options: [], isEnd: true }
+        { title: 'Pick a Protein', type: 'protein',
+            options: [
+                {name: 'Ground Beef'},
+                {name: 'Eye of round roast'},
+                {name: 'Sirloin tip side steak'},
+                {name: 'Round steak'},
+                {name: 'Top sirloin'}
+            ],
+            isStart: true },
+        { title: 'Pick your Veg', type: 'veg',
+            options: [
+                {name: 'Artichoke'},
+                {name: 'Asparagus'},
+                {name: 'Beets'},
+                {name: 'Broccoli'}
+            ]
+        },
+        { title: 'To Drink?', type: 'drink',
+            options: [
+                {name: 'Water'},
+                {name: 'Tea'},
+                {name: 'Coffee'}
+            ]
+        },
+        { title: 'Choose a Fat', type: 'fats',
+            options: [
+                {name: 'Almonds'},
+                {name: 'Walnuts'},
+                {name: 'Canola oil'},
+                {name: 'Olive oil'}
+            ]
+        },
+        { title: 'Finally, Carbs', type: 'carbs',
+            options: [
+                {name: 'Oats, steel cut'},
+                {name: 'Oats, old fashioned'},
+                {name: 'Pumpkin'},
+                {name: 'Almond milk'},
+                {name: 'Fat free milk'}
+            ],
+            isEnd: true
+        }
     ],
     dailyTargets: {
         protein: 6,

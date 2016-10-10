@@ -1,5 +1,4 @@
 import ReactDOM from 'react-dom';
-import { getInitialViewState, getFlankedNeighborPositions, flipFlankedNeighbors, doesValidMoveExist } from './UIManagerReducerHelper.js'
 import { getMealCounts } from '../nutritionMeal/Meal.jsx';
 import { getDayRating } from '../nutritionDay/Day.jsx';
 import Constants from '../Constants.js';
@@ -15,7 +14,12 @@ const appReducer = (state = {}, action) => {
             if(viewState.activeView==='meal') return { viewState: {...viewState, activeView: 'month', activeMeal: []}};
             return { viewState: {...viewState, activeView: 'meal', activeMealStep: Constants.mealSteps[0].type, activeMeal: []}};
         case 'ADD_MEAL_OPTION':
-            viewState.activeMeal.push({name: action.name, type: action.foodType, count: 1, hours: new Date().getHours()});
+            if(viewState.activeMeal.filter((mealOption) => mealOption.name === action.name).length > 0){
+                viewState.activeMeal = viewState.activeMeal.filter((mealOption) => mealOption.name !== action.name);
+            }
+            else{
+                viewState.activeMeal.push({name: action.name, type: action.foodType, count: 1, hours: new Date().getHours()});
+            }
             return { viewState: {...viewState, activeMeal: viewState.activeMeal}};
         case 'LOAD_MEAL_DETAILS':
             let existingMeal = viewState.activeMealDetails === action.meal ? false : action.meal;

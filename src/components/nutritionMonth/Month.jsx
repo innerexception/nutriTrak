@@ -15,7 +15,7 @@ export const getNutritionCalendarView = (nutritionMonth, nutritionSelectedDay, a
                 {nutritionDay.day === (nutritionSelectedDay && nutritionSelectedDay.day) ? getNutritionDayView(nutritionDay, activeView, showMealDetails, onAddMealClicked, onGotoCalendarClicked) : null }
                 {nutritionDay.day <= new Date().getDate() ?
                     <div className='nutrition-day-bar' onClick={nutritionDay.day === (nutritionSelectedDay && nutritionSelectedDay.day) ? ()=> onShowDayDetails(nutritionDay) : ()=>onDayClicked(nutritionDay)}>
-                        <div className='nutrition-day-bar-bar' style={{width: (getDayRating(nutritionDay)*10)+'%', background: 'rgba('+getColorFromRating(getDayRating(nutritionDay))+')'}}></div>
+                        <div className='nutrition-day-bar-bar' style={{width: (Math.min(100,getDayRating(nutritionDay)*10))+'%', background: 'rgba('+getColorFromRating(getDayRating(nutritionDay))+')'}}></div>
                         <div className='nutrition-day-bar-rating'>{getDayRating(nutritionDay).toFixed(1)}</div>
                     </div> :
                     <div className='nutrition-day-bar'>

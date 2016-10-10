@@ -44,6 +44,7 @@
 
 .nutrition-meal-option{
     transition: all 500ms;
+    cursor: pointer;
 }
 
 .nutrition-meal-step.in .nutrition-meal-option{
@@ -63,6 +64,7 @@
 
 .nutrition-step-title{
     transition: all 500ms;
+    cursor: pointer;
 }
 
 .nutrition-meal-step.in .nutrition-step-title{

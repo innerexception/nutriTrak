@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { dayClicked, addMealClicked, mealOptionAdded, gotoCalendar, showDayDetails, hideDayDetails,
          showMealDetails, hideMealDetails, mealNextStep, mealPreviousStep, mealStepSelected, monthScoreDetails } from './UIManagerActions.js'
-import { getInitialViewState } from './UIManagerReducerHelper.js';
 import UIManager from './UIManager.jsx'
 
 const mapStateToProps = (state) => {

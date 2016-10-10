@@ -39,7 +39,7 @@ export const getMealRating = (meal) => {
     Object.keys(Constants.dailyTargets).forEach((type) => {
         mealRating += mealCounts[type];
     });
-    return ((mealRating/19)*100);
+    return ((mealRating/22)*100);
 };
 
 export const getMealDetails = (meal) =>{
