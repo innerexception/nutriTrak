@@ -5,7 +5,7 @@ import Constants from '../Constants.js';
 
 export const getNutritionDayView = (nutritionDay, activeView, showMealDetails, onAddMealClicked, onGotoCalendarClicked) => {
     let previousMealValues = 0, previousMealTimePercent=5;
-    let totalWidth = (getDayRating(nutritionDay)/10)-0.17;
+    let totalWidth = 0.83;
     let lastMeal = nutritionDay.meals.filter((meal) => meal[0].hours === new Date().getHours())[0];
     return (
         <div className='nutrition-day-view'>

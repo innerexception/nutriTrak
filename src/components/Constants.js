@@ -17,7 +17,7 @@ export default {
                     [{type: 'drink', count: 1, hours: 16}, {type: 'carbs', count: 3}, {type: 'protein', count: 2}]
                 ]
             },
-            { day: 3, month: 3, year: 2016, protein: 3, veg: 0, drink: 6, fats: 4, carbs: 5,
+            { day: 3, month: 3, year: 2016, protein: 3, veg: 0, drink: 3, fats: 4, carbs: 5,
                 meals: [
                     [{type: 'protein', count: 1, hours: 6}, {type: 'drink', count: 1}, {type: 'fats', count: 2}],
                     [{type: 'fats', count: 2, hours: 11}, {type: 'drink', count: 1}],
@@ -31,16 +31,15 @@ export default {
                     [{type: 'drink', count: 1, hours: 16}, {type: 'carbs', count: 3}, {type: 'protein', count: 2}]
                 ]
             },
-            { day: 5, month: 3, year: 2016, protein: 6, veg: 9, drink: 8, fats: 3, carbs: 3,
+            { day: 5, month: 3, year: 2016, protein: 4, veg: 6, drink: 4, fats: 3, carbs: 3,
                 meals: [
                     [{type: 'protein', count: 1, hours: 9}, {type: 'drink', count: 1}, {type: 'veg', count: 3}, {type: 'fats', count: 1}],
                     [{type: 'fats', count: 1, hours: 11}, {type: 'drink', count: 1}],
                     [{type: 'drink', count: 1, hours: 16}, {type: 'carbs', count: 3}, {type: 'protein', count: 2}],
-                    [{type: 'protein', count: 1, hours: 17}, {type: 'drink', count: 1}, {type: 'veg', count: 3}, {type: 'fats', count: 1}],
-                    [{type: 'protein', count: 2, hours: 20}, {type: 'drink', count: 1}, {type: 'veg', count: 3}, {type: 'fats', count: 1}]
+                    [{type: 'protein', count: 1, hours: 17}, {type: 'drink', count: 1}, {type: 'veg', count: 3}, {type: 'fats', count: 1}]
                 ]
             },
-            { day: 6, month: 3, year: 2016, protein: 5, veg: 3, drink: 5, fats: 4, carbs: 3,
+            { day: 6, month: 3, year: 2016, protein: 6, veg: 3, drink: 5, fats: 4, carbs: 3,
                 meals: [
                     [{type: 'protein', count: 1, hours: 8}, {type: 'drink', count: 1}, {type: 'veg', count: 3}, {type: 'fats', count: 1}],
                     [{type: 'fats', count: 1, hours: 11}, {type: 'drink', count: 1}, {type: 'protein', count: 1, hours: 11}],
@@ -49,23 +48,23 @@ export default {
                     [{type: 'fats', count: 1, hours: 20}, {type: 'drink', count: 1}, {type: 'protein', count: 1, hours: 11}]
                 ]
             },
-            { day: 7, month: 3, year: 2016, rating: 8.8, protein: 3, veg: 7, drink: 6, fats: 2, carbs: 5,
+            { day: 7, month: 3, year: 2016, protein: 3, veg: 3, drink: 3, fats: 2, carbs: 3,
                 meals: [
                     [{type: 'protein', count: 1, hours: 6}, {type: 'drink', count: 1}, {type: 'veg', count: 3}, {type: 'fats', count: 1}],
                     [{type: 'fats', count: 1, hours: 11}, {type: 'drink', count: 1}],
                     [{type: 'drink', count: 1, hours: 16}, {type: 'carbs', count: 3}, {type: 'protein', count: 2}]
                 ]
             },
-            { day: 8, month: 3, year: 2016, protein: 5, veg: 0, drink: 8, fats: 4, carbs: 5,
+            { day: 8, month: 3, year: 2016, protein: 5, veg: 0, drink: 6, fats: 4, carbs: 5,
                 meals: [
-                    [{type: 'protein', count: 3, hours: 6}, {type: 'drink', count: 1}, {type: 'fats', count: 2}],
-                    [{type: 'fats', count: 2, hours: 11}, {type: 'drink', count: 1}],
-                    [{type: 'drink', count: 1, hours: 16}, {type: 'carbs', count: 5}, {type: 'protein', count: 2}]
+                    [{type: 'protein', count: 3, hours: 6}, {type: 'drink', count: 2}, {type: 'fats', count: 2}],
+                    [{type: 'fats', count: 2, hours: 11}, {type: 'drink', count: 2}],
+                    [{type: 'drink', count: 2, hours: 16}, {type: 'carbs', count: 5}, {type: 'protein', count: 2}]
                 ]
             },
-            { day: 9, month: 3, year: 2016, protein: 3, veg: 7, drink: 6, fats: 2, carbs: 5,
+            { day: 9, month: 3, year: 2016, protein: 4, veg: 3, drink: 3, fats: 2, carbs: 3,
                 meals: [
-                    [{type: 'protein', count: 1, hours: 6}, {type: 'drink', count: 1}, {type: 'veg', count: 3}, {type: 'fats', count: 1}],
+                    [{type: 'protein', count: 2, hours: 6}, {type: 'drink', count: 1}, {type: 'veg', count: 3}, {type: 'fats', count: 1}],
                     [{type: 'fats', count: 1, hours: 9}, {type: 'drink', count: 1}],
                     [{type: 'drink', count: 1, hours: 12}, {type: 'carbs', count: 3}, {type: 'protein', count: 2}]
                 ]

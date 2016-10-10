@@ -1,7 +1,5 @@
 
-//TODO fix positioning/sizing of meal bars to add button
-//TODO add meal button is disabled if you have eaten too recently, with click tooltip to explain
-
+//TODO fix positioning/sizing of meal bars to day bar
 
 //TODO MealBuilder rules: -----------
 //TODO add water tracking to meal builder
