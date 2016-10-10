@@ -72,3 +72,10 @@ export const mealStepSelected = (step) => {
         step
     }
 };
+
+export const monthScoreDetails = (month) => {
+    return {
+        type: 'MONTH_DETAILS_SHOW',
+        month
+    }
+};

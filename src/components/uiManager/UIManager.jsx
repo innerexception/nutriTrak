@@ -1,6 +1,6 @@
 import React from 'react';
 import './UIManager.css';
-import { getNutritionCalendarView, getNutritionMealView } from './UIManagerHelper.js';
+import { getNutritionCalendarView, getNutritionMealView, getMonthReport } from './UIManagerHelper.js';
 import { loadNutritionCalendar } from './UIManagerActions.js';
 import { getMonthScore, getColorFromRating } from  '../Util.js';
 import Constants from '../Constants.js';
@@ -20,11 +20,16 @@ class UIManager extends React.Component {
             <div className='ui-frame'>
                 <div className='nutri-trak-score'>
                     <div className='logo icon'><div className='logo-text'>NutriTrak</div></div>
-                    <div className='score' onClick={null}>
-                        <div className='avatar icon'></div>
-                        <span>Drive Rating: </span>
+                    <div className='score' onClick={()=>this.props.onShowMonthDetails(this.props.viewState.nutritionMonth)}>
+                        <div className='avatar icon'>
+                            <span style={{marginLeft: '130%'}}>Preseason</span>
+                        </div>
+                        <span style={{verticalAlign: 'bottom'}}>Drive Rating: </span>
                         { this.props.viewState.nutritionMonth ?
-                            <span style={{color: 'rgba('+getColorFromRating(getMonthScore(this.props.viewState.nutritionMonth))+')'}}>{getMonthScore(this.props.viewState.nutritionMonth)}</span> : null}
+                            <span style={{verticalAlign:'bottom', color: 'rgba('+getColorFromRating(getMonthScore(this.props.viewState.nutritionMonth))+')'}}>{getMonthScore(this.props.viewState.nutritionMonth)}</span> : null}
+                    </div>
+                    <div className={'month-details-popup '+(this.props.viewState.showMonthDetails ? 'in' : 'out')}>
+                        { getMonthReport(this.props.viewState.nutritionMonth)}
                     </div>
                 </div>
                 <div className={'nutri-trak-calendar '+(this.props.viewState.activeView === 'month' ? 'in' : 'out')}>

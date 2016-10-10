@@ -24,7 +24,7 @@ body{
     padding: 2em;
     border: solid #364150 2px;
     border-radius: 0.5em;
-    height: calc(100% - 10em);
+    height: calc(100% - 15em);
     overflow:hidden;
 }
 
@@ -62,13 +62,14 @@ body{
 }
 
 .nutrition-day.past{
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 .nutrition-day.maximized{
     height: 92%;
     width: 100%;
     border: none;
+    opacity: 1;
 }
 .nutrition-day.minimized{
     opacity: 0;
@@ -93,10 +94,12 @@ body{
     height: 100%;
     position: relative;
     width: 83%;
+    cursor: pointer;
 }
 
 .nutrition-day.maximized .nutrition-day-bar{
     height: 25%;
+    border: 1px solid #F4AE00;
 }
 
 .nutrition-day-bar-bar{
@@ -146,6 +149,7 @@ body{
     width: 100%;
     height: 100%;
     position: relative;
+    overflow: hidden;
 }
 .nutrition-meal-btn{
     position: absolute;
@@ -322,6 +326,30 @@ body{
     width: 2em;
     height: 2em;
     display: inline-block;
+}
+
+.morning-span{
+    position: absolute;
+    top: 1.5em;
+    left: 5em;
+    width: 3em;
+}
+
+.month-details-popup{
+    position: absolute;
+    right: 0;
+    background: #364150;
+    z-index: 1;
+    border-radius: 0.2em;
+    border: 2px dashed #2C3543;
+    transition: opacity 200ms, width 700ms;
+}
+.month-details-popup.in{
+    width: 30%;
+}
+.month-details-popup.out{
+    width: 0;
+    opacity: 0;
 }
 
 @keyframes pass {

@@ -51,10 +51,10 @@ export const getNutritionDayView = (nutritionDay, activeView, onAddMealClicked, 
             </div>
             <div className='nutrition-day-right'>
                 <div className='nutrition-day-time-bar'>
-                    <div className='nutrition-day-icon icon'></div>
+                    <div className='nutrition-day-icon icon'><span className='morning-span'>6 am</span></div>
                     { new Date().getDate() === nutritionDay.day ?
                         <div className={'nutrition-meal-btn icon '+(activeView==='meal' ? 'cancel' : '')} style={{top: getPercentFromTimeOfDay(new Date())+'%'}} onClick={()=>onAddMealClicked()}></div> : null }
-                    <div className='nutrition-night-icon icon'></div>
+                    <div className='nutrition-night-icon icon'><span className='morning-span'>10 pm</span></div>
                     <div className='nutrition-day-back-btn icon' onClick={onGotoCalendarClicked}></div>
                 </div>
             </div>
@@ -101,12 +101,17 @@ export const getDayDetails = (day) =>
         })}
     </div>;
 
-//TODO add a line next to the add button, offset it, add a few time hashlines
-//TODO add meal details click showing bonus/penalties
-//TODO add calendar overview score
+export const getMonthReport = (month) =>
+    <div style={{fontSize:'0.6em', padding:'1em'}}>Your drive score is an average of your daily scores. To raise this, get better daily scores. Click on a day to see a score breakdown.</div>;
+
+export const getMealReport = (meal) =>
+    <div></div>;
+
+//TODO add meal details click showing bonus/penalties, do meal styles
 //TODO add a bunch of test foods
+
+//TODO MealBuilder rules: -----------
 //TODO add water tracking to meal builder
-//TODO add season indicator at calendar view
 //TODO add free (recharge meal) checkbox to meal builder, (gray out when appropriate)
 //TODO Protein is required
 //TODO Protein requires min 1 carb or veg
@@ -116,3 +121,4 @@ export const getDayDetails = (day) =>
 //TODO bonus for 5 or 6 meals
 //TODO add meal button is disabled if you have eaten too recently, with click tooltip to explain
 //TODO show bonuses/penalties during meal builder
+//TODO ------------------

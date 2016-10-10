@@ -28,6 +28,8 @@ const appReducer = (state = {}, action) => {
             return { viewState: updateViewStateActiveMealStep(viewState, action.activeStep)};
         case 'MEAL_SELECT_STEP':
             return { viewState: updateViewStateActiveMealStep(viewState, action.step, true)};
+        case 'MONTH_DETAILS_SHOW':
+            return { viewState: {...viewState, showMonthDetails: !viewState.showMonthDetails}};
         default:
             return state
     }
