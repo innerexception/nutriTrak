@@ -20,6 +20,7 @@ body{
 
 .nutri-trak-calendar{
     margin: 3em;
+    margin-top: 0;
     padding: 2em;
     border: solid #364150 2px;
     border-radius: 0.5em;
@@ -49,7 +50,7 @@ body{
     position: relative;
     transition: all 500ms;
     width: 14%;
-    height: 20%;
+    height: 18%;
 }
 
 .nutrition-day.label{
@@ -182,6 +183,7 @@ body{
 .nutrition-meal-btn{
     background-image: url('../../../img/add.png');
     cursor: pointer;
+    transition: all 1s;
 }
 
 .nutrition-step-next-btn{
@@ -190,6 +192,10 @@ body{
     margin-left: auto;
     margin-right: auto;
     margin-top: 1em;
+}
+
+.cancel{
+    transform: rotate(45deg);
 }
 
 .nutrition-step-next-btn.add-meal{
@@ -281,6 +287,42 @@ body{
     overflow: hidden;
 }
 
+.nutri-trak-score{
+    font-size: 3em;
+    margin-left: 1em;
+    margin-top: 0.2em;
+}
+
+.nutri-trak-score .score{
+    display: inline-block;
+    margin-right: 1em;
+    margin-top: 0.3em;
+    float: right;
+    cursor: help;
+}
+.score span{
+    font-size: 0.6em;
+}
+.nutri-trak-score .logo{
+    background-image: url('../../../img/mu-logo-dark.png');
+    width: 6em;
+    height: 2.5em;
+    display: inline-block;
+    background-position-y: 0.2em;
+    position: relative;
+}
+.logo-text{
+    position: absolute;
+    bottom: -10%;
+    left: 34%;
+}
+.avatar{
+    background-image: url('../../../img/user.png');
+    border-radius: 1em;
+    width: 2em;
+    height: 2em;
+    display: inline-block;
+}
 
 @keyframes pass {
     from {transform: scale(0.5);}

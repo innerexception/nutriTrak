@@ -15,8 +15,8 @@ const mapDispatchToProps = (dispatch) => {
         onDayClicked: (day) => {
             dispatch(dayClicked(day))
         },
-        onAddMealClicked: () => {
-            dispatch(addMealClicked())
+        onAddMealClicked: (activeMeal) => {
+            dispatch(addMealClicked(activeMeal))
         },
         onMealOptionAdded: (mealOption, type) => {
             dispatch(mealOptionAdded(mealOption.name, type))

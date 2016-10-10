@@ -1,9 +1,9 @@
 import React from 'react';
 import { onDayClicked } from './UIManagerActions.js';
-import { getMealCounts } from '../Util.js';
+import { getMealCounts, getColorFromRating } from '../Util.js';
 import Constants from '../Constants.js';
 
-export const getNutritionCalendarView = (nutritionMonth, nutritionSelectedDay, showDayDetails, onDayClicked, onAddMealClicked,
+export const getNutritionCalendarView = (nutritionMonth, nutritionSelectedDay, activeMeal, showDayDetails, activeView, onDayClicked, onAddMealClicked,
                                          onGotoCalendarClicked, onShowMealDetails, onHideMealDetails, onShowDayDetails, onHideDayDetails) =>
     <div className='calendar-view'>
         { Constants.days.map((day) => {
@@ -11,22 +11,23 @@ export const getNutritionCalendarView = (nutritionMonth, nutritionSelectedDay, s
         }) }
         { nutritionMonth.map((nutritionDay) => {
             return <div className={getDayClassName(nutritionDay, nutritionSelectedDay)}>
-                        {nutritionDay.day === (nutritionSelectedDay && nutritionSelectedDay.day) ? getNutritionDayView(nutritionDay, onAddMealClicked, onGotoCalendarClicked) : null }
-                        <div className='nutrition-day-bar' onClick={()=>onDayClicked(nutritionDay)} onMouseEnter={()=>onShowDayDetails(nutritionDay)} onMouseLeave={()=>onHideDayDetails(nutritionDay)}>
-                            <div className='nutrition-day-bar-bar' style={{width: (nutritionDay.rating*10)+'%', background: getColorFromRating(nutritionDay.rating)}}></div>
-                            <div className='nutrition-day-bar-rating'>{nutritionDay.rating}</div>
-                        </div>
+                        {nutritionDay.day === (nutritionSelectedDay && nutritionSelectedDay.day) ? getNutritionDayView(nutritionDay, activeView, onAddMealClicked, onGotoCalendarClicked) : null }
+                        {nutritionDay.day <= new Date().getDate() ?
+                            <div className='nutrition-day-bar' onClick={()=>onDayClicked(nutritionDay)} onMouseEnter={()=>onShowDayDetails(nutritionDay)} onMouseLeave={()=>onHideDayDetails(nutritionDay)}>
+                                <div className='nutrition-day-bar-bar' style={{width: (nutritionDay.rating*10)+'%', background: 'rgba('+getColorFromRating(nutritionDay.rating)+')'}}></div>
+                                <div className='nutrition-day-bar-rating'>{nutritionDay.rating}</div>
+                            </div> :
+                            <div className='nutrition-day-bar'>
+                                <div className='nutrition-day-bar-bar' style={{width: (nutritionDay.rating*10)+'%', background: 'rgba('+getColorFromRating(nutritionDay.rating)+')'}}></div>
+                                <div className='nutrition-day-bar-rating'>-.-</div>
+                            </div>
+                        }
                         <div className={'nutrition-day-detail '+(showDayDetails && showDayDetails.day === nutritionDay.day ? 'in' : 'out')}>
                             { getDayDetails(nutritionDay) }
                         </div>
                    </div>
         }) }
     </div>;
-
-//TODO
-const getColorFromRating = (rating) => {
-    return 'green';
-};
 
 const getDayClassName = (day, selectedDay) => {
     let className = 'nutrition-day ';
@@ -36,8 +37,7 @@ const getDayClassName = (day, selectedDay) => {
     return className;
 };
 
-//TODO: add turns into cancel when meal editor open
-export const getNutritionDayView = (nutritionDay, onAddMealClicked, onGotoCalendarClicked, onShowMealDetails, onHideMealDetails) => {
+export const getNutritionDayView = (nutritionDay, activeView, onAddMealClicked, onGotoCalendarClicked, onShowMealDetails, onHideMealDetails) => {
     let previousMealValues = 0;
     return (
         <div className='nutrition-day-view'>
@@ -53,7 +53,7 @@ export const getNutritionDayView = (nutritionDay, onAddMealClicked, onGotoCalend
                 <div className='nutrition-day-time-bar'>
                     <div className='nutrition-day-icon icon'></div>
                     { new Date().getDate() === nutritionDay.day ?
-                        <div className='nutrition-meal-btn icon' style={{top: getPercentFromTimeOfDay(new Date())+'%'}} onClick={onAddMealClicked}></div> : null }
+                        <div className={'nutrition-meal-btn icon '+(activeView==='meal' ? 'cancel' : '')} style={{top: getPercentFromTimeOfDay(new Date())+'%'}} onClick={()=>onAddMealClicked()}></div> : null }
                     <div className='nutrition-night-icon icon'></div>
                     <div className='nutrition-day-back-btn icon' onClick={onGotoCalendarClicked}></div>
                 </div>
@@ -92,7 +92,8 @@ const getMealRating = (meal) => {
     return (mealRating/19)*100;
 };
 
-//TODO
+//TODO, showing meal bonus/penalties and info;;;;;;; change day detail show to be on click, when in day view only
+//TODO Scores needs rounding and to be accurate 1-10
 export const getDayDetails = (day) =>
     <div>The Day Stats
         { Object.keys(Constants.dailyTargets).map((type) => {
@@ -100,8 +101,18 @@ export const getDayDetails = (day) =>
         })}
     </div>;
 
-//TODO Day score needs rounding and to be accurate 1-10
-//TODO Render future days with blank template
 //TODO add a line next to the add button, offset it, add a few time hashlines
-//TODO add meal details mouse over
+//TODO add meal details click showing bonus/penalties
 //TODO add calendar overview score
+//TODO add a bunch of test foods
+//TODO add water tracking to meal builder
+//TODO add season indicator at calendar view
+//TODO add free (recharge meal) checkbox to meal builder, (gray out when appropriate)
+//TODO Protein is required
+//TODO Protein requires min 1 carb or veg
+//TODO add extra advice text with an info button hover
+//TODO penalty for eating 1st meal too late
+//TODO add veg 3 minimum back
+//TODO bonus for 5 or 6 meals
+//TODO add meal button is disabled if you have eaten too recently, with click tooltip to explain
+//TODO show bonuses/penalties during meal builder

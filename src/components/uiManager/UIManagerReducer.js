@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import { getInitialViewState, getFlankedNeighborPositions, flipFlankedNeighbors, doesValidMoveExist } from './UIManagerReducerHelper.js'
-import { getMealCounts } from '../Util.js';
+import { getMealCounts, getDayRating } from '../Util.js';
 import Constants from '../Constants.js';
 
 const appReducer = (state = {}, action) => {
@@ -11,7 +11,8 @@ const appReducer = (state = {}, action) => {
         case 'LOAD_DAY_VIEW':
             return { viewState: {...viewState, nutritionDay: action.nutritionDay }};
         case 'LOAD_MEAL_VIEW':
-            return { viewState: {...viewState, activeView: 'meal', activeMealStep: Constants.mealSteps[0].type, activeMeal: action.meal ? action.meal : []}};
+            if(viewState.activeView==='meal') return { viewState: {...viewState, activeView: 'month', activeMeal: []}};
+            return { viewState: {...viewState, activeView: 'meal', activeMealStep: Constants.mealSteps[0].type, activeMeal: []}};
         case 'ADD_MEAL_OPTION':
             viewState.activeMeal.push({name: action.name, type: action.foodType, count: 1, hours: new Date().getHours()});
             return { viewState: {...viewState, activeMeal: viewState.activeMeal}};
@@ -65,14 +66,6 @@ const updateViewStateActiveMealStep = (viewState, activeStep, setStep) => {
 
     newState.activeMealStep = Constants.mealSteps[stepIndex].type;
     return newState;
-};
-
-const getDayRating = (day) => {
-    let dayRating = 0;
-    Object.keys(Constants.dailyTargets).forEach((type) => {
-        dayRating += day[type]/Constants.dailyTargets[type];
-    });
-    return dayRating;
 };
 
 export default appReducer;
