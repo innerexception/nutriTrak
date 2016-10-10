@@ -70,11 +70,10 @@ export default {
                     [{type: 'drink', count: 1, hours: 12}, {type: 'carbs', count: 3}, {type: 'protein', count: 2}]
                 ]
             },
-            { day: 10, month: 3, year: 2016, protein: 3, veg: 4, drink: 3, fats: 2, carbs: 3,
+            { day: 10, month: 3, year: 2016, protein: 1, veg: 4, drink: 4, fats: 2, carbs: 0,
                 meals: [
                     [{type: 'protein', count: 1, hours: 8}, {type: 'drink', count: 1}, {type: 'veg', count: 4}, {type: 'fats', count: 1}],
-                    [{type: 'fats', count: 1, hours: 11}, {type: 'drink', count: 1}],
-                    [{type: 'drink', count: 1, hours: 16}, {type: 'carbs', count: 3}, {type: 'protein', count: 2}]
+                    [{type: 'fats', count: 1, hours: 11}, {type: 'drink', count: 3}]
                 ]
             },
             { day: 11, month: 3, year: 2016, meals: []},

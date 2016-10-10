@@ -6,6 +6,7 @@ import Constants from '../Constants.js';
 export const getNutritionDayView = (nutritionDay, activeView, showMealDetails, onAddMealClicked, onGotoCalendarClicked) => {
     let previousMealValues = 0, previousMealTimePercent=5;
     let totalWidth = (getDayRating(nutritionDay)/10)-0.17;
+    let lastMeal = nutritionDay.meals.filter((meal) => meal[0].hours === new Date().getHours())[0];
     return (
         <div className='nutrition-day-view'>
             <div className='nutrition-day-left'>
@@ -26,7 +27,7 @@ export const getNutritionDayView = (nutritionDay, activeView, showMealDetails, o
                 <div className='nutrition-day-time-bar'>
                     <div className='nutrition-day-icon icon'><span className='morning-span'>6 am</span></div>
                     { new Date().getDate() === nutritionDay.day ?
-                        <div className={'nutrition-meal-btn icon '+(activeView==='meal' ? 'cancel' : '')} style={{top: getPercentFromTimeOfDay(new Date())+'%'}} onClick={()=>onAddMealClicked()}></div> : null }
+                        <div className={'nutrition-meal-btn icon '+(activeView==='meal' ? 'cancel ' : '')+(lastMeal ? 'disabled' : '')} title={lastMeal ? 'You\'ve eaten recently, wait a little while':null} style={{top: getPercentFromTimeOfDay(new Date())+'%'}} onClick={lastMeal ? null : ()=>onAddMealClicked()}></div> : null }
                     <div className='nutrition-night-icon icon'><span className='morning-span'>10 pm</span></div>
                     <div className='nutrition-day-back-btn icon' onClick={onGotoCalendarClicked}></div>
                 </div>
