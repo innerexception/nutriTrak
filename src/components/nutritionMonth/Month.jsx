@@ -15,11 +15,11 @@ export const getNutritionCalendarView = (nutritionMonth, nutritionSelectedDay, a
                 {nutritionDay.day === (nutritionSelectedDay && nutritionSelectedDay.day) ? getNutritionDayView(nutritionDay, activeView, showMealDetails, onAddMealClicked, onGotoCalendarClicked) : null }
                 {nutritionDay.day <= new Date().getDate() ?
                     <div className='nutrition-day-bar' onClick={nutritionDay.day === (nutritionSelectedDay && nutritionSelectedDay.day) ? ()=> onShowDayDetails(nutritionDay) : ()=>onDayClicked(nutritionDay)}>
-                        <div className='nutrition-day-bar-bar' style={{width: (nutritionDay.rating*10)+'%', background: 'rgba('+getColorFromRating(nutritionDay.rating)+')'}}></div>
-                        <div className='nutrition-day-bar-rating'>{nutritionDay.rating.toFixed(1)}</div>
+                        <div className='nutrition-day-bar-bar' style={{width: (getDayRating(nutritionDay)*10)+'%', background: 'rgba('+getColorFromRating(getDayRating(nutritionDay))+')'}}></div>
+                        <div className='nutrition-day-bar-rating'>{getDayRating(nutritionDay).toFixed(1)}</div>
                     </div> :
                     <div className='nutrition-day-bar'>
-                        <div className='nutrition-day-bar-bar' style={{width: (nutritionDay.rating*10)+'%', background: 'rgba('+getColorFromRating(nutritionDay.rating)+')'}}></div>
+                        <div className='nutrition-day-bar-bar' style={{width: (getDayRating(nutritionDay)*10)+'%', background: 'rgba('+getColorFromRating(getDayRating(nutritionDay))+')'}}></div>
                         <div className='nutrition-day-bar-rating'>-.-</div>
                     </div>
                 }
@@ -52,6 +52,6 @@ export const getMonthScore = (month) => {
             monthRating+=dayRateing;
         }
     });
-    return (monthRating/month.length).toFixed(1);
+    return monthRating/activeDays;
 };
 

@@ -27,7 +27,7 @@ class UIManager extends React.Component {
                         </div>
                         <span style={{verticalAlign: 'bottom'}}>Drive Rating: </span>
                         { this.props.viewState.nutritionMonth ?
-                            <span style={{verticalAlign:'bottom', color: 'rgba('+getColorFromRating(getMonthScore(this.props.viewState.nutritionMonth))+')'}}>{getMonthScore(this.props.viewState.nutritionMonth)}</span> : null}
+                            <span style={{verticalAlign:'bottom', color: 'rgba('+getColorFromRating(getMonthScore(this.props.viewState.nutritionMonth))+')'}}>{getMonthScore(this.props.viewState.nutritionMonth).toFixed(1)}</span> : null}
                     </div>
                     <div className={'month-details-popup '+(this.props.viewState.showMonthDetails ? 'in' : 'out')}>
                         { getMonthReport(this.props.viewState.nutritionMonth)}

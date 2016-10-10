@@ -20779,7 +20779,7 @@
 	exports.default = {
 	    testUser: {
 	        nutritionHistory: [{ day: 1, month: 3, year: 2016, rating: 8.8, protein: 3, veg: 7, drink: 6, fats: 2, carbs: 5,
-	            meals: [[{ type: 'protein', count: 1, hours: 6 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }], [{ type: 'fats', count: 1, hours: 11 }, { type: 'drink', count: 1 }], [{ type: 'drink', count: 1, hours: 16 }, { type: 'carbs', count: 3 }, { type: 'protein', count: 2 }]]
+	            meals: [[{ type: 'protein', count: 1, hours: 6 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }], [{ type: 'fats', count: 1, hours: 11 }, { type: 'drink', count: 1 }, { type: 'protein', count: 1, hours: 11 }], [{ type: 'fats', count: 1, hours: 13 }, { type: 'drink', count: 1 }, { type: 'protein', count: 1, hours: 11 }], [{ type: 'drink', count: 1, hours: 16 }, { type: 'carbs', count: 3 }, { type: 'protein', count: 2 }], [{ type: 'fats', count: 1, hours: 20 }, { type: 'drink', count: 1 }, { type: 'protein', count: 1, hours: 11 }]]
 	        }, { day: 2, month: 3, year: 2016, rating: 8.8, protein: 3, veg: 7, drink: 6, fats: 2, carbs: 5,
 	            meals: [[{ type: 'protein', count: 1, hours: 6 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }], [{ type: 'fats', count: 1, hours: 11 }, { type: 'drink', count: 1 }], [{ type: 'drink', count: 1, hours: 16 }, { type: 'carbs', count: 3 }, { type: 'protein', count: 2 }]]
 	        }, { day: 3, month: 3, year: 2016, rating: 8.8, protein: 3, veg: 7, drink: 6, fats: 2, carbs: 5,
@@ -20796,7 +20796,7 @@
 	            meals: [[{ type: 'protein', count: 1, hours: 6 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }], [{ type: 'fats', count: 1, hours: 11 }, { type: 'drink', count: 1 }], [{ type: 'drink', count: 1, hours: 16 }, { type: 'carbs', count: 3 }, { type: 'protein', count: 2 }]]
 	        }, { day: 9, month: 3, year: 2016, rating: 7.8, protein: 3, veg: 7, drink: 6, fats: 2, carbs: 5,
 	            meals: [[{ type: 'protein', count: 1, hours: 6 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }], [{ type: 'fats', count: 1, hours: 9 }, { type: 'drink', count: 1 }], [{ type: 'drink', count: 1, hours: 12 }, { type: 'carbs', count: 3 }, { type: 'protein', count: 2 }]]
-	        }, { day: 10, month: 3, year: 2016, rating: 8.8, protein: 3, veg: 4, drink: 3, fats: 2, carbs: 3,
+	        }, { day: 10, month: 3, year: 2016, rating: 8.8, protein: 3, veg: 3, drink: 3, fats: 2, carbs: 3,
 	            meals: [[{ type: 'protein', count: 1, hours: 6 }, { type: 'drink', count: 1 }, { type: 'veg', count: 4 }, { type: 'fats', count: 1 }], [{ type: 'fats', count: 1, hours: 11 }, { type: 'drink', count: 1 }], [{ type: 'drink', count: 1, hours: 16 }, { type: 'carbs', count: 3 }, { type: 'protein', count: 2 }]]
 	        }, { day: 11, month: 3, year: 2016, meals: [] }, { day: 12, month: 3, year: 2016, meals: [] }, { day: 13, month: 3, year: 2016, meals: [] }, { day: 14, month: 3, year: 2016, meals: [] }, { day: 15, month: 3, year: 2016, meals: [] }, { day: 16, month: 3, year: 2016, meals: [] }, { day: 17, month: 3, year: 2016, meals: [] }, { day: 18, month: 3, year: 2016, meals: [] }, { day: 19, month: 3, year: 2016, meals: [] }, { day: 20, month: 3, year: 2016, meals: [] }, { day: 21, month: 3, year: 2016, meals: [] }, { day: 22, month: 3, year: 2016, meals: [] }, { day: 23, month: 3, year: 2016, meals: [] }, { day: 24, month: 3, year: 2016, meals: [] }, { day: 25, month: 3, year: 2016, meals: [] }, { day: 26, month: 3, year: 2016, meals: [] }, { day: 27, month: 3, year: 2016, meals: [] }, { day: 28, month: 3, year: 2016, meals: [] }, { day: 29, month: 3, year: 2016, meals: [] }, { day: 30, month: 3, year: 2016, meals: [] }, { day: 31, month: 3, year: 2016, meals: [] }]
 	    },
@@ -21325,8 +21325,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var getNutritionDayView = exports.getNutritionDayView = function getNutritionDayView(nutritionDay, activeView, showMealDetails, onAddMealClicked, onGotoCalendarClicked, onShowMealDetails) {
+	var getNutritionDayView = exports.getNutritionDayView = function getNutritionDayView(nutritionDay, activeView, showMealDetails, onAddMealClicked, onGotoCalendarClicked) {
 	    var previousMealValues = 0;
+	    var totalWidth = getDayRating(nutritionDay) / 10 - 0.17;
 	    return _react2.default.createElement(
 	        'div',
 	        { className: 'nutrition-day-view' },
@@ -21335,18 +21336,14 @@
 	            { className: 'nutrition-day-left' },
 	            nutritionDay.meals.map(function (meal) {
 	                var leftPadding = previousMealValues;
-	                previousMealValues += (0, _Meal.getMealRating)(meal);
+	                previousMealValues += (0, _Meal.getMealRating)(meal) * totalWidth;
 	                return _react2.default.createElement(
 	                    'div',
-	                    { className: 'nutrition-meal', onClick: function onClick() {
-	                            return onShowMealDetails(meal);
-	                        },
-	                        style: { width: (0, _Meal.getMealRating)(meal) + '%', marginLeft: leftPadding + '%', marginTop: meal[0].hours / 24 * 8 + '%' } },
+	                    { className: 'nutrition-meal', style: { width: (0, _Meal.getMealRating)(meal) * totalWidth + '%', marginLeft: leftPadding + '%', marginTop: meal[0].hours / 24 * 7.3 + '%' } },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'nutrition-meal-detail ' + (showMealDetails && showMealDetails === meal ? 'in' : 'out') },
-	                        (0, _Meal.getMealDetails)(meal),
-	                        _react2.default.createElement('div', { className: 'down-arrow' })
+	                        { className: 'nutrition-meal-detail' },
+	                        (0, _Meal.getMealDetails)(meal)
 	                    )
 	                );
 	            })
@@ -21404,8 +21401,10 @@
 	        'Today so far:',
 	        Object.keys(_Constants2.default.dailyTargets).map(function (type) {
 	            var difference = day[type] - _Constants2.default.dailyTargets[type];
-	            if (difference > 0 && (type === 'veg' || type === 'drink')) difference = '+' + difference;
-	            if (difference < 0 && (type !== 'veg' || type !== 'drink')) difference = '' + difference;
+	            var color = 'green';
+	            if (difference > 0 && type !== 'veg' && type !== 'drink') color = 'red';
+	            if (difference < 0) color = 'red';
+	            if (difference > 0) difference = '+' + difference;
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -21417,7 +21416,7 @@
 	                ' ',
 	                difference !== 0 ? _react2.default.createElement(
 	                    'span',
-	                    { style: { color: difference > 0 ? 'green' : 'red' } },
+	                    { style: { color: color } },
 	                    '(',
 	                    difference,
 	                    ')'
@@ -22677,7 +22676,7 @@
 	                        this.props.viewState.nutritionMonth ? _react2.default.createElement(
 	                            'span',
 	                            { style: { verticalAlign: 'bottom', color: 'rgba(' + (0, _Util.getColorFromRating)((0, _Month.getMonthScore)(this.props.viewState.nutritionMonth)) + ')' } },
-	                            (0, _Month.getMonthScore)(this.props.viewState.nutritionMonth)
+	                            (0, _Month.getMonthScore)(this.props.viewState.nutritionMonth).toFixed(1)
 	                        ) : null
 	                    ),
 	                    _react2.default.createElement(
@@ -22813,16 +22812,16 @@
 	                        } : function () {
 	                            return onDayClicked(nutritionDay);
 	                        } },
-	                    _react2.default.createElement('div', { className: 'nutrition-day-bar-bar', style: { width: nutritionDay.rating * 10 + '%', background: 'rgba(' + (0, _Util.getColorFromRating)(nutritionDay.rating) + ')' } }),
+	                    _react2.default.createElement('div', { className: 'nutrition-day-bar-bar', style: { width: (0, _Day.getDayRating)(nutritionDay) * 10 + '%', background: 'rgba(' + (0, _Util.getColorFromRating)((0, _Day.getDayRating)(nutritionDay)) + ')' } }),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'nutrition-day-bar-rating' },
-	                        nutritionDay.rating.toFixed(1)
+	                        (0, _Day.getDayRating)(nutritionDay).toFixed(1)
 	                    )
 	                ) : _react2.default.createElement(
 	                    'div',
 	                    { className: 'nutrition-day-bar' },
-	                    _react2.default.createElement('div', { className: 'nutrition-day-bar-bar', style: { width: nutritionDay.rating * 10 + '%', background: 'rgba(' + (0, _Util.getColorFromRating)(nutritionDay.rating) + ')' } }),
+	                    _react2.default.createElement('div', { className: 'nutrition-day-bar-bar', style: { width: (0, _Day.getDayRating)(nutritionDay) * 10 + '%', background: 'rgba(' + (0, _Util.getColorFromRating)((0, _Day.getDayRating)(nutritionDay)) + ')' } }),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'nutrition-day-bar-rating' },
@@ -22866,7 +22865,7 @@
 	            monthRating += dayRateing;
 	        }
 	    });
-	    return (monthRating / month.length).toFixed(1);
+	    return monthRating / activeDays;
 	};
 
 /***/ },
@@ -22931,7 +22930,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var getColorFromRating = exports.getColorFromRating = function getColorFromRating(rating) {
-	    return _chromaJs2.default.mix('#ff0000', '#00ff00', rating / 10, 'lab').rgba();
+	    return rating ? _chromaJs2.default.mix('#ff0000', '#00ff00', parseInt(rating.toFixed(1)) / 10, 'lab').rgba() : null;
 	};
 
 /***/ },

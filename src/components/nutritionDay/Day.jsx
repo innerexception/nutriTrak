@@ -3,19 +3,18 @@ import './Day.css'
 import { getMealRating, getMealDetails } from '../nutritionMeal/Meal.jsx';
 import Constants from '../Constants.js';
 
-export const getNutritionDayView = (nutritionDay, activeView, showMealDetails, onAddMealClicked, onGotoCalendarClicked, onShowMealDetails) => {
+export const getNutritionDayView = (nutritionDay, activeView, showMealDetails, onAddMealClicked, onGotoCalendarClicked) => {
     let previousMealValues = 0;
+    let totalWidth = (getDayRating(nutritionDay)/10)-0.17;
     return (
         <div className='nutrition-day-view'>
             <div className='nutrition-day-left'>
                 { nutritionDay.meals.map((meal) => {
                     let leftPadding = previousMealValues;
-                    previousMealValues+=getMealRating(meal);
-                    return <div className='nutrition-meal' onClick={()=>onShowMealDetails(meal)}
-                                style={{width: getMealRating(meal)+'%', marginLeft: (leftPadding)+'%', marginTop: ((meal[0].hours/24)*8)+'%'}}>
-                                <div className={'nutrition-meal-detail '+(showMealDetails && showMealDetails === meal ? 'in' : 'out')}>
+                    previousMealValues+=getMealRating(meal)*totalWidth;
+                    return <div className='nutrition-meal' style={{width: (getMealRating(meal)*totalWidth)+'%', marginLeft: (leftPadding)+'%', marginTop: ((meal[0].hours/24)*7.3)+'%'}}>
+                                <div className='nutrition-meal-detail'>
                                     { getMealDetails(meal) }
-                                    <div className='down-arrow'></div>
                                 </div>
                             </div>
                 }) }
@@ -51,10 +50,12 @@ export const getDayDetails = (day) =>
         Today so far:
         { Object.keys(Constants.dailyTargets).map((type) => {
             let difference = day[type] - Constants.dailyTargets[type];
-            if(difference > 0 && (type === 'veg' || type === 'drink')) difference = '+'+difference;
-            if(difference < 0 && (type !== 'veg' || type!=='drink')) difference = ''+difference;
+            let color = 'green';
+            if(difference > 0 && (type !== 'veg' && type !== 'drink')) color = 'red';
+            if(difference < 0) color = 'red';
+            if(difference > 0) difference = '+'+difference;
             return <div>{type}: {day[type]} / {Constants.dailyTargets[type]} {difference !== 0 ?
-                        <span style={{color: difference > 0 ? 'green':'red'}}>({difference})</span> :
+                        <span style={{color: color}}>({difference})</span> :
                         <span className='checkmark inline'></span>}
                    </div>
         })}
