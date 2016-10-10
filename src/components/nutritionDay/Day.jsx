@@ -12,7 +12,7 @@ export const getNutritionDayView = (nutritionDay, activeView, showMealDetails, o
                 { nutritionDay.meals.map((meal) => {
                     let leftPadding = previousMealValues;
                     previousMealValues+=getMealRating(meal)*totalWidth;
-                    return <div className='nutrition-meal' style={{width: (getMealRating(meal)*totalWidth)+'%', marginLeft: (leftPadding)+'%', marginTop: ((meal[0].hours/24)*7.3)+'%'}}>
+                    return <div className='nutrition-meal' title={'This meal represents '+getMealRating(meal).toFixed(0)+ '% of your daily goal'} style={{width: (getMealRating(meal)*totalWidth)+'%', marginLeft: (leftPadding)+'%', marginTop: ((meal[0].hours/24)*7.3)+'%'}}>
                                 <div className='nutrition-meal-detail'>
                                     { getMealDetails(meal) }
                                 </div>
@@ -39,10 +39,9 @@ const getPercentFromTimeOfDay = (date) => {
 export const getDayRating = (day) => {
     let dayRating = 0;
     Object.keys(Constants.dailyTargets).forEach((type) => {
-        if(day[type] <= Constants.dailyTargets[type]) dayRating += day[type]/Constants.dailyTargets[type];
-        else dayRating+= 1+ (0.01*(day[type] - Constants.dailyTargets[type]));
+        dayRating += day[type];
     });
-    return (dayRating/5)*10;
+    return dayRating/22*10;
 };
 
 //TODO, convert to table layout
@@ -70,6 +69,6 @@ export const getDayDetails = (day) =>
             })}
             <tr><td>Meals:</td><td>{day.meals.length} / 5-6</td></tr>
             <tr><td>Ate within an hour of waking</td><td><span className='checkmark inline'></span></td></tr>
-            <tr><td>Recharge meals used</td><td><span className='checkmark inline'></span></td></tr>
+            <tr><td>Recharge meals used</td><td>(Only during season and postseason)</td></tr>
         </table>
     </div>;
