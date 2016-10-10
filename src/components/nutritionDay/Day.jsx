@@ -4,15 +4,18 @@ import { getMealRating, getMealDetails } from '../nutritionMeal/Meal.jsx';
 import Constants from '../Constants.js';
 
 export const getNutritionDayView = (nutritionDay, activeView, showMealDetails, onAddMealClicked, onGotoCalendarClicked) => {
-    let previousMealValues = 0;
+    let previousMealValues = 0, previousMealTimePercent=5;
     let totalWidth = (getDayRating(nutritionDay)/10)-0.17;
     return (
         <div className='nutrition-day-view'>
             <div className='nutrition-day-left'>
                 { nutritionDay.meals.map((meal) => {
+                    let topPadding = previousMealTimePercent;
+                    previousMealTimePercent = ((meal[0].hours-5)/15)*100;
+                    let currentTimePercent = ((meal[0].hours-5)/15)*100;
                     let leftPadding = previousMealValues;
                     previousMealValues+=getMealRating(meal)*totalWidth;
-                    return <div className='nutrition-meal' title={'This meal represents '+getMealRating(meal).toFixed(0)+ '% of your daily goal'} style={{width: (getMealRating(meal)*totalWidth)+'%', marginLeft: (leftPadding)+'%', marginTop: ((meal[0].hours/24)*7.3)+'%'}}>
+                    return <div className='nutrition-meal' title={'This meal represents '+getMealRating(meal).toFixed(0)+ '% of your daily goal'} style={{width: (getMealRating(meal)*totalWidth)+'%', marginLeft: (Math.min(80,leftPadding))+'%', marginTop: (( currentTimePercent- topPadding)/5)+'%'}}>
                                 <div className='nutrition-meal-detail'>
                                     { getMealDetails(meal) }
                                 </div>

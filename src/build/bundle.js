@@ -21270,7 +21270,7 @@
 	        }, { day: 4, month: 3, year: 2016, protein: 3, veg: 3, drink: 3, fats: 2, carbs: 3,
 	            meals: [[{ type: 'protein', count: 1, hours: 7 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }], [{ type: 'fats', count: 1, hours: 11 }, { type: 'drink', count: 1 }], [{ type: 'drink', count: 1, hours: 16 }, { type: 'carbs', count: 3 }, { type: 'protein', count: 2 }]]
 	        }, { day: 5, month: 3, year: 2016, protein: 6, veg: 9, drink: 8, fats: 3, carbs: 3,
-	            meals: [[{ type: 'protein', count: 1, hours: 9 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }], [{ type: 'fats', count: 1, hours: 11 }, { type: 'drink', count: 1 }], [{ type: 'drink', count: 1, hours: 16 }, { type: 'carbs', count: 3 }, { type: 'protein', count: 2 }], [{ type: 'protein', count: 1, hours: 6 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }], [{ type: 'protein', count: 2, hours: 6 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }]]
+	            meals: [[{ type: 'protein', count: 1, hours: 9 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }], [{ type: 'fats', count: 1, hours: 11 }, { type: 'drink', count: 1 }], [{ type: 'drink', count: 1, hours: 16 }, { type: 'carbs', count: 3 }, { type: 'protein', count: 2 }], [{ type: 'protein', count: 1, hours: 17 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }], [{ type: 'protein', count: 2, hours: 20 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }]]
 	        }, { day: 6, month: 3, year: 2016, protein: 5, veg: 3, drink: 5, fats: 4, carbs: 3,
 	            meals: [[{ type: 'protein', count: 1, hours: 8 }, { type: 'drink', count: 1 }, { type: 'veg', count: 3 }, { type: 'fats', count: 1 }], [{ type: 'fats', count: 1, hours: 11 }, { type: 'drink', count: 1 }, { type: 'protein', count: 1, hours: 11 }], [{ type: 'fats', count: 1, hours: 13 }, { type: 'drink', count: 1 }, { type: 'protein', count: 1, hours: 11 }], [{ type: 'drink', count: 1, hours: 16 }, { type: 'carbs', count: 3 }, { type: 'protein', count: 2 }], [{ type: 'fats', count: 1, hours: 20 }, { type: 'drink', count: 1 }, { type: 'protein', count: 1, hours: 11 }]]
 	        }, { day: 7, month: 3, year: 2016, rating: 8.8, protein: 3, veg: 7, drink: 6, fats: 2, carbs: 5,
@@ -21331,7 +21331,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var getNutritionDayView = exports.getNutritionDayView = function getNutritionDayView(nutritionDay, activeView, showMealDetails, onAddMealClicked, onGotoCalendarClicked) {
-	    var previousMealValues = 0;
+	    var previousMealValues = 0,
+	        previousMealTimePercent = 5;
 	    var totalWidth = getDayRating(nutritionDay) / 10 - 0.17;
 	    return _react2.default.createElement(
 	        'div',
@@ -21340,11 +21341,14 @@
 	            'div',
 	            { className: 'nutrition-day-left' },
 	            nutritionDay.meals.map(function (meal) {
+	                var topPadding = previousMealTimePercent;
+	                previousMealTimePercent = (meal[0].hours - 5) / 15 * 100;
+	                var currentTimePercent = (meal[0].hours - 5) / 15 * 100;
 	                var leftPadding = previousMealValues;
 	                previousMealValues += (0, _Meal.getMealRating)(meal) * totalWidth;
 	                return _react2.default.createElement(
 	                    'div',
-	                    { className: 'nutrition-meal', title: 'This meal represents ' + (0, _Meal.getMealRating)(meal).toFixed(0) + '% of your daily goal', style: { width: (0, _Meal.getMealRating)(meal) * totalWidth + '%', marginLeft: leftPadding + '%', marginTop: meal[0].hours / 24 * 7.3 + '%' } },
+	                    { className: 'nutrition-meal', title: 'This meal represents ' + (0, _Meal.getMealRating)(meal).toFixed(0) + '% of your daily goal', style: { width: (0, _Meal.getMealRating)(meal) * totalWidth + '%', marginLeft: Math.min(80, leftPadding) + '%', marginTop: (currentTimePercent - topPadding) / 5 + '%' } },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'nutrition-meal-detail' },

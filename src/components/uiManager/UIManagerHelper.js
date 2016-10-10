@@ -1,6 +1,6 @@
 
 //TODO fix positioning/sizing of meal bars to add button
-
+//TODO add meal button is disabled if you have eaten too recently, with click tooltip to explain
 
 
 //TODO MealBuilder rules: -----------
@@ -10,6 +10,5 @@
 //TODO Protein requires min 1 carb or veg
 //TODO add extra advice text with an info button hover
 //TODO penalty for eating 1st meal too late
-//TODO add meal button is disabled if you have eaten too recently, with click tooltip to explain
 //TODO show bonuses/penalties during meal builder
 //TODO ------------------
