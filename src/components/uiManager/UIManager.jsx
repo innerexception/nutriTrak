@@ -23,7 +23,7 @@ class UIManager extends React.Component {
                 </div>
                 <div className={'nutri-trak-meal '+(this.props.viewState.activeView === 'meal' ? 'in' : 'out')}>
                     { this.props.viewState.nutritionDay ? getNutritionMealView(this.props.viewState.nutritionDay, this.props.viewState.activeMealStep, this.props.viewState.activeMeal,
-                        this.props.onMealOptionAdded, this.props.onNextMealStepClicked) : null }
+                        this.props.onMealOptionAdded, this.props.onNextMealStepClicked, this.props.onMealStepSelected) : null }
                 </div>
             </div>
         )

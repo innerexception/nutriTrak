@@ -1,5 +1,6 @@
 import React from 'react';
 import { onDayClicked } from './UIManagerActions.js';
+import { getMealCounts } from '../Util.js';
 import Constants from '../Constants.js';
 
 export const getNutritionCalendarView = (nutritionMonth, nutritionSelectedDay, showDayDetails, onDayClicked, onAddMealClicked,
@@ -22,6 +23,7 @@ export const getNutritionCalendarView = (nutritionMonth, nutritionSelectedDay, s
         }) }
     </div>;
 
+//TODO
 const getColorFromRating = (rating) => {
     return 'green';
 };
@@ -44,7 +46,7 @@ export const getNutritionDayView = (nutritionDay, onAddMealClicked, onGotoCalend
                     let leftPadding = previousMealValues;
                     previousMealValues+=getMealRating(meal);
                     return <div className='nutrition-meal' onMouseEnter={()=>onShowMealDetails(meal)} onMouseLeave={()=>onHideMealDetails(meal)}
-                                style={{width: getMealRating(meal)+'%', marginLeft: (leftPadding)+'%', marginTop: ((meal[0].hours/24)*15)+'%'}}></div>
+                                style={{width: getMealRating(meal)+'%', marginLeft: (leftPadding)+'%', marginTop: ((meal[0].hours/24)*8)+'%'}}></div>
                 }) }
             </div>
             <div className='nutrition-day-right'>
@@ -61,22 +63,20 @@ export const getNutritionDayView = (nutritionDay, onAddMealClicked, onGotoCalend
 };
 
 const getPercentFromTimeOfDay = (date) => {
-    return ((date.getHours()/24)*100)/2;
+    return ((date.getHours()/24)*100)*0.65;
 };
 
-//TODO: next button is a down arrow
-//TODO: onMealStepSelected
-export const getNutritionMealView = (day, activeStep, activeMeal, onMealOptionAdded, onNextMealStepClicked) =>
+export const getNutritionMealView = (day, activeStep, activeMeal, onMealOptionAdded, onNextMealStepClicked, onMealStepSelected) =>
     <div className='nutrition-meal-wizard'>
         {Constants.mealSteps.map((step) => {
             return <div className={'nutrition-meal-step '+(step.type === activeStep ? 'in' : 'out')}>
-                        <div className='nutrition-step-title' onClick={()=>onMealStepSelected(step)}>{step.title + (Constants.dailyTargets[step.type] ? ' ('+day[step.type]+' / '+Constants.dailyTargets[step.type]+' so far today)' : ' ('+day[step.type]+' so far today)')}</div>
+                        <div className='nutrition-step-title' onClick={()=>onMealStepSelected(step.type)}>{step.title + (Constants.dailyTargets[step.type] ? ' ('+day[step.type]+' / '+Constants.dailyTargets[step.type]+' so far today)' : ' ('+day[step.type]+' so far today)')}</div>
                         {step.options.map((mealOption) => {
                             return <div className={'nutrition-meal-option '+(isMealOptionSelected(activeMeal, mealOption) ? 'selected' : '')} onClick={()=>onMealOptionAdded(mealOption, step.type)}>{mealOption.name}</div>
                         })}
-                        <div className={'nutrition-step-next-btn '+(step.isEnd ? 'add-meal' : '')} onClick={()=>onNextMealStepClicked(activeStep)}></div>
+                        <div className={'nutrition-step-next-btn icon '+(step.isEnd ? 'add-meal' : '')} onClick={()=>onNextMealStepClicked(activeStep)}></div>
                    </div>
-        })};
+        })}
     </div>;
 
 const isMealOptionSelected = (activeMeal, mealOption) => {
@@ -92,20 +92,6 @@ const getMealRating = (meal) => {
     return (mealRating/19)*100;
 };
 
-const getMealCounts = (meal) => {
-    let counts  = {
-        protein:0,
-        fats:0,
-        veg:0,
-        drink:0,
-        carbs:0
-    };
-    meal.forEach((mealOption) => {
-        counts[mealOption.type]+=mealOption.count;
-    });
-    return counts;
-};
-
 //TODO
 export const getDayDetails = (day) =>
     <div>The Day Stats
@@ -114,5 +100,8 @@ export const getDayDetails = (day) =>
         })}
     </div>;
 
-//TODO make back button a calendar icon
+//TODO Day score needs rounding and to be accurate 1-10
+//TODO Render future days with blank template
 //TODO add a line next to the add button, offset it, add a few time hashlines
+//TODO add meal details mouse over
+//TODO add calendar overview score

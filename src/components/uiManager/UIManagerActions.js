@@ -66,9 +66,9 @@ export const mealNextStep = (activeStep) => {
     }
 };
 
-export const mealPreviousStep = (activeStep) => {
+export const mealStepSelected = (step) => {
     return {
-        type: 'MEAL_PREVIOUS_STEP',
-        activeStep
+        type: 'MEAL_SELECT_STEP',
+        step
     }
 };

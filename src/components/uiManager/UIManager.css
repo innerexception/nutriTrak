@@ -91,6 +91,7 @@ body{
 .nutrition-day-bar{
     height: 100%;
     position: relative;
+    width: 83%;
 }
 
 .nutrition-day.maximized .nutrition-day-bar{
@@ -126,6 +127,7 @@ body{
     height: 100%;
     background: #364150;
     border: 1px solid #F4AE00;
+    overflow: hidden;
 }
 .nutrition-day-right{
     position: absolute;
@@ -151,8 +153,8 @@ body{
 .icon{
     background-repeat: no-repeat;
     background-size: contain;
-    width: 5em;
-    height: 5em;
+    width: 4em;
+    height: 4em;
 }
 
 .nutrition-day-icon{
@@ -170,7 +172,7 @@ body{
 }
 
 .nutrition-day-back-btn{
-    background-image: url('../../../img/back.png');
+    background-image: url('../../../img/calendar.png');
     position: absolute;
     bottom: 5%;
     cursor: pointer;
@@ -179,6 +181,19 @@ body{
 
 .nutrition-meal-btn{
     background-image: url('../../../img/add.png');
+    cursor: pointer;
+}
+
+.nutrition-step-next-btn{
+    background-image: url('../../../img/down.png');
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+}
+
+.nutrition-step-next-btn.add-meal{
+    background-image: url('../../../img/ok.png');
     cursor: pointer;
 }
 
@@ -211,7 +226,11 @@ body{
 
 .nutrition-meal-step.in{
     width: 100%;
-    height: 80%;
+    height: 70%;
+}
+
+.nutrition-meal-option{
+    transition: all 500ms;
 }
 
 .nutrition-meal-step.in .nutrition-meal-option{
@@ -229,6 +248,10 @@ body{
     opacity: 1;
 }
 
+.nutrition-step-title{
+    transition: all 500ms;
+}
+
 .nutrition-meal-step.in .nutrition-step-title{
     font-size: 3em;
     padding: 1em;
@@ -238,12 +261,24 @@ body{
 .nutrition-meal-step.out .nutrition-meal-option{
     height:0;
     width:0;
+    opacity: 0;
 }
 
 .nutrition-meal-step.out .nutrition-step-title{
     font-size: 2em;
     padding: 0.1em;
     text-align: center;
+}
+
+.nutrition-meal-step.out .nutrition-step-next-btn{
+    height: 0;
+    width: 0;
+    opacity: 0;
+}
+
+.nutritional-meal-step.out{
+    height: 8%;
+    overflow: hidden;
 }
 
 

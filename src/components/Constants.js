@@ -39,8 +39,8 @@ export default {
             { day: 9, month: 3, year: 2016, rating: 7.8, protein: 3, veg: 7, drink: 6, fats: 2, carbs: 5,
                 meals: [
                     [{type: 'protein', count: 1, hours: 6}, {type: 'drink', count: 1}, {type: 'veg', count: 3}, {type: 'fats', count: 1}],
-                    [{type: 'fats', count: 1, hours: 11}, {type: 'drink', count: 1}],
-                    [{type: 'drink', count: 1, hours: 24}, {type: 'carbs', count: 3}, {type: 'protein', count: 2}]
+                    [{type: 'fats', count: 1, hours: 9}, {type: 'drink', count: 1}],
+                    [{type: 'drink', count: 1, hours: 12}, {type: 'carbs', count: 3}, {type: 'protein', count: 2}]
                 ]
             },
             { day: 10, month: 3, year: 2016, rating: 8.8, protein: 3, veg: 7, drink: 6, fats: 2, carbs: 5,

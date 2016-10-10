@@ -1,20 +1,19 @@
 import ReactDOM from 'react-dom';
 import { getInitialViewState, getFlankedNeighborPositions, flipFlankedNeighbors, doesValidMoveExist } from './UIManagerReducerHelper.js'
+import { getMealCounts } from '../Util.js';
 import Constants from '../Constants.js';
 
 const appReducer = (state = {}, action) => {
     let viewState = state.viewState;
     switch (action.type) {
         case 'LOAD_MONTH_VIEW':
-            let newState = { viewState: {...viewState, activeView: 'month', nutritionMonth: action.nutritionMonth ? action.nutritionMonth : viewState.nutritionMonth, nutritionDay: false, activeDayDetails: null, activeMeal:[] }};
-
-            return newState;
+            return { viewState: {...viewState, activeView: 'month', nutritionMonth: action.nutritionMonth ? action.nutritionMonth : viewState.nutritionMonth, nutritionDay: false, activeDayDetails: null, activeMeal:[]}};
         case 'LOAD_DAY_VIEW':
             return { viewState: {...viewState, nutritionDay: action.nutritionDay }};
         case 'LOAD_MEAL_VIEW':
             return { viewState: {...viewState, activeView: 'meal', activeMealStep: Constants.mealSteps[0].type, activeMeal: action.meal ? action.meal : []}};
         case 'ADD_MEAL_OPTION':
-            viewState.activeMeal.push({name: action.name, type: action.foodType});
+            viewState.activeMeal.push({name: action.name, type: action.foodType, count: 1, hours: new Date().getHours()});
             return { viewState: {...viewState, activeMeal: viewState.activeMeal}};
         case 'LOAD_MEAL_DETAILS':
             return { viewState: {...viewState, activeMealDetails: action.meal}};
@@ -26,15 +25,15 @@ const appReducer = (state = {}, action) => {
             return { viewState: {...viewState, activeDayDetails: null}};
         case 'MEAL_NEXT_STEP':
             return { viewState: updateViewStateActiveMealStep(viewState, action.activeStep)};
-        case 'MEAL_PREVIOUS_STEP':
-            return { viewState: updateViewStateActiveMealStep(viewState, action.activeStep, true)};
+        case 'MEAL_SELECT_STEP':
+            return { viewState: updateViewStateActiveMealStep(viewState, action.step, true)};
         default:
             return state
     }
 };
 
 const updateNutritionMonthAddMealToday = (meal, nutritionDay, nutritionMonth) => {
-    let newMonth = {...nutritionMonth};
+    let newMonth = Array.from(nutritionMonth);
     newMonth.forEach((day) => {
         if(day.day === nutritionDay.day){
             let mealCounts = getMealCounts(meal);
@@ -43,6 +42,7 @@ const updateNutritionMonthAddMealToday = (meal, nutritionDay, nutritionMonth) =>
             day.drink += mealCounts.drink;
             day.carbs += mealCounts.carbs;
             day.veg += mealCounts.veg;
+            meal[0].hours = new Date().getHours();
             day.meals.push(meal);
             day.rating = getDayRating(day);
         }
@@ -50,26 +50,20 @@ const updateNutritionMonthAddMealToday = (meal, nutritionDay, nutritionMonth) =>
     return newMonth;
 };
 
-const updateViewStateActiveMealStep = (viewState, activeStep, previous) => {
+const updateViewStateActiveMealStep = (viewState, activeStep, setStep) => {
     let newState = {...viewState};
     let stepIndex=0;
     Constants.mealSteps.forEach((step, i) => { if(step.type === activeStep) stepIndex = i; });
 
-    if(previous){
-        if(stepIndex > 0) stepIndex--;
-        else{
-            newState.activeView = 'month';
-            newState.activeMealStep = Constants.mealSteps[0].type;
-            newState.activeMeal = [];
-        }
-    }
-    else{
+    if(!setStep){
         if(stepIndex < Constants.mealSteps.length-1) stepIndex++;
         else{
             newState.nutritionMonth = updateNutritionMonthAddMealToday(newState.activeMeal, newState.nutritionDay, newState.nutritionMonth);
+            newState.activeView = 'month';
         }
     }
-    newState.activeStep = Constants.mealSteps[stepIndex].type;
+
+    newState.activeMealStep = Constants.mealSteps[stepIndex].type;
     return newState;
 };
 
