@@ -75,12 +75,7 @@ export default {
                     [{type: 'fats', count: 1, hours: 11}, {type: 'drink', count: 3}]
                 ]
             },
-            { day: 11, month: 3, year: 2016, protein: 1, veg: 4, drink: 4, fats: 2, carbs: 0,
-                meals: [
-                    [{type: 'protein', count: 1, hours: 8}, {type: 'drink', count: 1}, {type: 'veg', count: 4}, {type: 'fats', count: 1}],
-                    [{type: 'fats', count: 1, hours: 11}, {type: 'drink', count: 3}]
-                ]
-            },
+            { day: 11, month: 3, year: 2016, meals: []},
             { day: 12, month: 3, year: 2016, meals: []},
             { day: 13, month: 3, year: 2016, meals: []},
             { day: 14, month: 3, year: 2016, meals: []},

@@ -13,7 +13,7 @@ export const getNutritionCalendarView = (nutritionMonth, nutritionSelectedDay, a
         { nutritionMonth.map((nutritionDay) => {
             return <div className={getDayClassName(nutritionDay, nutritionSelectedDay)}>
                 {nutritionDay.day === (nutritionSelectedDay && nutritionSelectedDay.day) ? getNutritionDayView(nutritionDay, activeView, showMealDetails, onAddMealClicked, onGotoCalendarClicked) : null }
-                {nutritionDay.day <= new Date().getDate() ?
+                {nutritionDay.day <= 10 ?
                     <div className='nutrition-day-bar' onClick={nutritionDay.day === (nutritionSelectedDay && nutritionSelectedDay.day) ? ()=> onShowDayDetails(nutritionDay) : ()=>onDayClicked(nutritionDay)}>
                         <div className='nutrition-day-bar-bar' style={{width: (Math.min(100,getDayRating(nutritionDay)*10))+'%', background: 'rgba('+getColorFromRating(getDayRating(nutritionDay))+')'}}></div>
                         <div className='nutrition-day-bar-rating'>{getDayRating(nutritionDay).toFixed(1)}</div>
@@ -35,7 +35,7 @@ const getDayClassName = (day, selectedDay) => {
     let className = 'nutrition-day ';
     if(selectedDay) className += (day.day === (selectedDay && selectedDay.day) ? 'maximized' : 'minimized');
     let today = new Date().getDate();
-    if(day.day !== today) className += ' past';
+    if(day.day !== 10) className += ' past';
     return className;
 };
 

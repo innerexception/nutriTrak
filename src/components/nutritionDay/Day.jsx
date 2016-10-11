@@ -26,7 +26,7 @@ export const getNutritionDayView = (nutritionDay, activeView, showMealDetails, o
             <div className='nutrition-day-right'>
                 <div className='nutrition-day-time-bar'>
                     <div className='nutrition-day-icon icon'><span className='morning-span'>6 am</span></div>
-                    { new Date().getDate() === nutritionDay.day ?
+                    { 10 === nutritionDay.day ?
                         <div className={'nutrition-meal-btn icon '+(activeView==='meal' ? 'cancel ' : '')+(lastMeal ? 'disabled' : '')} title={lastMeal ? 'You\'ve eaten recently, wait a little while':null} style={{top: getPercentFromTimeOfDay(new Date())+'%'}} onClick={lastMeal ? null : ()=>onAddMealClicked()}></div> : null }
                     <div className='nutrition-night-icon icon'><span className='morning-span'>10 pm</span></div>
                     <div className='nutrition-day-back-btn icon' onClick={onGotoCalendarClicked}></div>
